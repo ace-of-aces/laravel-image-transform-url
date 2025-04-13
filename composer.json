@@ -32,13 +32,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ace-of-aces\\LaravelImageTransformUrl\\": "src/",
-            "ace-of-aces\\LaravelImageTransformUrl\\Database\\Factories\\": "database/factories/"
+            "AceOfAces\\LaravelImageTransformUrl\\": "src/",
+            "AceOfAces\\LaravelImageTransformUrl\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ace-of-aces\\LaravelImageTransformUrl\\Tests\\": "tests/",
+            "AceOfAces\\LaravelImageTransformUrl\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
