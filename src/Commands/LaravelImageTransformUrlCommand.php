@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace AceOfAces\LaravelImageTransformUrl\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelImageTransformUrlCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-image-transform-url';
 
     public $description = 'My command';
 

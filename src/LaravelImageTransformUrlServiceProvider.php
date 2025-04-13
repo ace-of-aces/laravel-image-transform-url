@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace AceOfAces\LaravelImageTransformUrl;
 
+use AceOfAces\LaravelImageTransformUrl\Commands\LaravelImageTransformUrlCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class LaravelImageTransformUrlServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('laravel-image-transform-url')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_laravel_image_transform_url_table')
+            ->hasCommand(LaravelImageTransformUrlCommand::class);
     }
 }
