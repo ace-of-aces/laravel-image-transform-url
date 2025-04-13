@@ -2,7 +2,6 @@
 
 namespace AceOfAces\LaravelImageTransformUrl;
 
-use AceOfAces\LaravelImageTransformUrl\Commands\LaravelImageTransformUrlCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
