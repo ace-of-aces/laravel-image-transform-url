@@ -23,13 +23,6 @@ You can install the package via composer:
 composer require ace-of-aces/laravel-image-transform-url
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-image-transform-url-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
@@ -43,18 +36,9 @@ return [
 ];
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-image-transform-url-views"
-```
-
 ## Usage
 
-```php
-$laravelImageTransformUrl = new AceOfAces\LaravelImageTransformUrl();
-echo $laravelImageTransformUrl->echoPhrase('Hello, ace-of-aces!');
-```
+TODO
 
 ## Testing
 
@@ -68,16 +52,11 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+TODO
 
 ## Credits
 
-- [Julian Schramm](https://github.com/ace-of-aces)
-- [All Contributors](../../contributors)
+TODO
 
 ## License
 

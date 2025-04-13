@@ -17,9 +17,6 @@ class LaravelImageTransformUrlServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-image-transform-url')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_image_transform_url_table')
-            ->hasCommand(LaravelImageTransformUrlCommand::class);
+            ->hasConfigFile();
     }
 }
