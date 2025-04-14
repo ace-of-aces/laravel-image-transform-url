@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'public_path' => env('IMAGE_TRANSFORM_PUBLIC_PATH', 'test-data'), // TODO
+    'public_path' => env('IMAGE_TRANSFORM_PUBLIC_PATH', 'images'),
 
     /*
     |--------------------------------------------------------------------------

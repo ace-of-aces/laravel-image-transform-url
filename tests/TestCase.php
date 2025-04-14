@@ -3,6 +3,7 @@
 namespace AceOfAces\LaravelImageTransformUrl\Tests;
 
 use AceOfAces\LaravelImageTransformUrl\LaravelImageTransformUrlServiceProvider;
+use Illuminate\Contracts\Config\Repository;
 use Intervention\Image\Laravel\ServiceProvider as InterventionImageServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -26,5 +27,18 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app->register(InterventionImageServiceProvider::class);
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function defineEnvironment($app)
+    {
+        tap($app['config'], function (Repository $config) {
+            $config->set('image-transform-url.public_path', 'test-data');
+        });
     }
 }
