@@ -7,7 +7,6 @@ use Intervention\Image\Laravel\Facades\Image;
 
 uses(TestCase::class)->in(__DIR__);
 
-
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -22,7 +21,7 @@ uses(TestCase::class)->in(__DIR__);
 
 expect()->extend('toBeImage', function (array $options = []) {
     // $this->value here is the value passed to expect(), which should be a TestResponse
-    if (!$this->value instanceof TestResponse) {
+    if (! $this->value instanceof TestResponse) {
         throw new InvalidArgumentException('Value passed to toBeImage() must be an instance of Illuminate\Testing\TestResponse.');
     }
 
@@ -57,6 +56,6 @@ expect()->extend('toBeImage', function (array $options = []) {
         return $this;
 
     } catch (NotReadableException $e) {
-        return $this->fail('Response content is not a readable image: ' . $e->getMessage());
+        return $this->fail('Response content is not a readable image: '.$e->getMessage());
     }
 });

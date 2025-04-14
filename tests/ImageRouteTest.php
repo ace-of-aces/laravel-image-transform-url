@@ -59,7 +59,7 @@ it('can process the quality option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
-        //TODO: add quality check
+        // TODO: add quality check
     ]);
 });
 
@@ -72,6 +72,6 @@ it('can process multiple options at once', function () {
     expect($response)->toBeImage([
         'width' => 100,
         'mime' => 'image/gif',
-        //TODO: add quality check
+        // TODO: add quality check
     ]);
 });
