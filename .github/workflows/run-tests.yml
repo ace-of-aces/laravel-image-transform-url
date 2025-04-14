@@ -56,7 +56,7 @@ jobs:
         run: composer show -D
 
       - name: Build Workbench
-        run: composer build
+        run: vendor/bin/testbench workbench:build
 
       - name: Execute tests
         run: vendor/bin/pest --ci
