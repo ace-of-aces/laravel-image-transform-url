@@ -91,7 +91,7 @@ it('can process multiple options at once', function () {
     ]);
 });
 
-it('can serve from the cache after identical requests', function() {
+it('can serve from the cache after identical requests', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'width=500',
