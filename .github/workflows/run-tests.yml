@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --no-interaction --no-update
+          composer install --prefer-dist --no-interaction
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
