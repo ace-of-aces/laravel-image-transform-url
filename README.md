@@ -47,7 +47,7 @@ Use the following URL format to transform your images:
 http://<domain>/<route-prefix>/<options>/<path-to-your-image.<extension>>
 ```
 
-e.g.:
+for example:
 ```
 http://localhost:8000/image-transform/width=250,quality=80,format=webp/foo/bar/example.jpg
 ```
