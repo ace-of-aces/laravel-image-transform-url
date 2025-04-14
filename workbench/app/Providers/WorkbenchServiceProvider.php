@@ -20,7 +20,7 @@ class WorkbenchServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../../../workbench/test-img' => public_path('test-img'),
+            __DIR__.'/../../../workbench/test-data' => public_path('test-data'),
         ], 'test-assets');
     }
 }

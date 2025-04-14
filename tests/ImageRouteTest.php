@@ -2,7 +2,11 @@
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 
-it('doesn\'t work for non-existent files', function () {
+beforeEach(function () {
+    Cache::flush();
+});
+
+it('returns 404 for non-existent files', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'width=100',
@@ -12,11 +16,21 @@ it('doesn\'t work for non-existent files', function () {
     $response->assertNotFound();
 });
 
+it('returns 404 for non-image files', function () {
+    /** @var TestCase $this */
+    $response = $this->get(route('image.transform', [
+        'options' => 'width=100',
+        'path' => 'text.txt',
+    ]));
+
+    $response->assertNotFound();
+});
+
 it('can process the height option', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'width=100',
-        'path' => 'test-img/cat.jpg',
+        'path' => 'cat.jpg',
     ]));
 
     expect($response)->toBeImage([
@@ -29,7 +43,7 @@ it('can process the width option', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'height=100',
-        'path' => 'test-img/cat.jpg',
+        'path' => 'cat.jpg',
     ]));
 
     expect($response)->toBeImage([
@@ -42,7 +56,7 @@ it('can process the format option', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'format=webp',
-        'path' => 'test-img/cat.jpg',
+        'path' => 'cat.jpg',
     ]));
 
     expect($response)->toBeImage([
@@ -54,7 +68,7 @@ it('can process the quality option', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'quality=50',
-        'path' => 'test-img/cat.jpg',
+        'path' => 'cat.jpg',
     ]));
 
     expect($response)->toBeImage([
@@ -64,9 +78,10 @@ it('can process the quality option', function () {
 });
 
 it('can process multiple options at once', function () {
+    /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
         'options' => 'width=100,format=gif,quality=50',
-        'path' => 'test-img/cat.jpg',
+        'path' => 'cat.jpg',
     ]));
 
     expect($response)->toBeImage([
@@ -74,4 +89,23 @@ it('can process multiple options at once', function () {
         'mime' => 'image/gif',
         // TODO: add quality check
     ]);
+});
+
+it('can serve from the cache after identical requests', function() {
+    /** @var TestCase $this */
+    $response = $this->get(route('image.transform', [
+        'options' => 'width=500',
+        'path' => 'cat.jpg',
+    ]));
+
+    $response->assertOk();
+    $response->assertHeader('X-Cache', 'MISS');
+
+    $secondResponse = $this->get(route('image.transform', [
+        'options' => 'width=500',
+        'path' => 'cat.jpg',
+    ]));
+
+    $response->assertOk();
+    $secondResponse->assertHeader('X-Cache', 'HIT');
 });
