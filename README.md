@@ -33,12 +33,12 @@ composer require ace-of-aces/laravel-image-transform-url
 Publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-image-transform-url-config"
+php artisan vendor:publish --tag="image-transform-url-config"
 ```
 
 ## Usage
 
-1. Configure the package via `config/laravel-image-transform-url.php` to set your `public_path`, from where you want to transform the images.
+1. Configure the package via `config/image-transform-url.php` to set your `public_path`, from where you want to transform the images.
 
 2. Test your first image transformation:
 
