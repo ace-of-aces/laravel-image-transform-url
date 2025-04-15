@@ -200,7 +200,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             ...(config()->boolean('image-transform-url.cache.enabled') ? [
                 'X-Cache' => $cacheHit ? 'HIT' : 'MISS',
             ] : []),
-            ...(config()->array('image-transform-url.headers') ?? []),
+            ...(config()->array('image-transform-url.headers')),
         ]);
     }
 }
