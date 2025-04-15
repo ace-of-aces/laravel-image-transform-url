@@ -1,30 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 
 beforeEach(function () {
     Cache::flush();
     Storage::fake('local');
-});
-
-it('returns 404 for non-existent files', function () {
-    /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
-        'options' => 'width=100',
-        'path' => 'non-existent.jpg',
-    ]));
-
-    $response->assertNotFound();
-});
-
-it('returns 404 for non-image files', function () {
-    /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
-        'options' => 'width=100',
-        'path' => 'text.txt',
-    ]));
-
-    $response->assertNotFound();
 });
 
 it('can process the height option', function () {
@@ -128,23 +110,4 @@ it('can process multiple options at once', function () {
         'mime' => 'image/gif',
         // TODO: add more checks
     ]);
-});
-
-it('can serve from the cache after identical requests', function () {
-    /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
-        'options' => 'width=500',
-        'path' => 'cat.jpg',
-    ]));
-
-    $response->assertOk();
-    $response->assertHeader('X-Cache', 'MISS');
-
-    $secondResponse = $this->get(route('image.transform', [
-        'options' => 'width=500',
-        'path' => 'cat.jpg',
-    ]));
-
-    $response->assertOk();
-    $secondResponse->assertHeader('X-Cache', 'HIT');
 });
