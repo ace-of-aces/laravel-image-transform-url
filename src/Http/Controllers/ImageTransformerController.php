@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\GifEncoder;
@@ -35,11 +36,16 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
         if (config()->boolean('image-transform-url.cache.enabled')) {
             $cachePath = $this->getCachePath($path, $options);
 
-            if (Cache::has('image-transform-url:'.$cachePath) && File::exists($cachePath)) {
+            if (File::exists($cachePath)) {
+                if (Cache::has('image-transform-url:'.$cachePath)) {
                 return response(File::get($cachePath), 200, [
                     'Content-Type' => File::mimeType($cachePath),
                     'X-Cache' => 'HIT',
                 ]);
+                } else {
+                    // Cache expired, delete the cache file and continue
+                    File::delete($cachePath);
+                }
             }
         }
 
@@ -200,6 +206,6 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
 
-        return realpath(storage_path('framework/cache/images/'.$pathPrefix.'/'.json_encode($options).$path));
+        return Storage::disk('local')->path('_cache/image-transform-url/'.$pathPrefix.'/'.json_encode($options).'_'.$path);
     }
 }

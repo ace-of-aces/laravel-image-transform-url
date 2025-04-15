@@ -4,6 +4,7 @@ use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 
 beforeEach(function () {
     Cache::flush();
+    Storage::fake('local');
 });
 
 it('returns 404 for non-existent files', function () {
