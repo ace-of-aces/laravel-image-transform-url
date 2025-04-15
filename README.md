@@ -58,7 +58,7 @@ http://localhost:8000/image-transform/width=250,quality=80,format=webp/foo/bar/e
 
 ## Options
 
-> [!INFO]
+> [!NOTE]
 > The options are separated by commas and their values are appended with equal signs. The order of options does not matter.
 
 | Option     | Description                          | Type   | Possible Values                                               |
