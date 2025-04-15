@@ -42,7 +42,7 @@ class TestCase extends Orchestra
     {
         tap($app['config'], function (Repository $config) {
             $config->set('image-transform-url.public_path', 'test-data');
-            $config->set('image-transform-url.enabled_options',AllowedOptions::all());
+            $config->set('image-transform-url.enabled_options', AllowedOptions::all());
         });
     }
 }

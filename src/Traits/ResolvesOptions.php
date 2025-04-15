@@ -8,7 +8,6 @@ use Illuminate\Support\Arr;
 
 trait ResolvesOptions
 {
-
     /**
      * Get the positive int value of the given option.
      */
