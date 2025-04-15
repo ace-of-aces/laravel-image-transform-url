@@ -6,7 +6,7 @@ use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 
 beforeEach(function () {
     Cache::flush();
-    Storage::fake('local');
+    Storage::fake(config()->string('image-transform-url.cache.disk'));
 });
 
 it('can process the height option', function () {
@@ -109,5 +109,18 @@ it('can process multiple options at once', function () {
         'width' => 100,
         'mime' => 'image/gif',
         // TODO: add more checks
+    ]);
+});
+
+it('can handle a trailing comma in options', function () {
+    /** @var TestCase $this */
+    $response = $this->get(route('image.transform', [
+        'options' => 'width=100,',
+        'path' => 'cat.jpg',
+    ]));
+
+    expect($response)->toBeImage([
+        'width' => 100,
+        'mime' => 'image/jpeg',
     ]);
 });
