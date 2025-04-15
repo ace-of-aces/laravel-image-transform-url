@@ -228,6 +228,8 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
 
-        return Storage::disk('local')->path('_cache/image-transform-url/'.$pathPrefix.'/'.json_encode($options).'_'.$path);
+        $optionsHash = md5(json_encode($options));
+
+        return Storage::disk(config()->string('image-transform-url.cache.disk'))->path('_cache/image-transform-url/'.$pathPrefix.'/'.$optionsHash.'_'.$path);
     }
 }

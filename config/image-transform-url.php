@@ -52,13 +52,14 @@ return [
     | Here you may configure the image cache settings. The cache is used to
     | store the transformed images for a certain amount of time. This is
     | useful to prevent reprocessing the same image multiple times.
-    | The cache is stored in the 'storage/framework/cache' directory.
+    | The cache is stored in the configured cache disk.
     |
     */
 
     'cache' => [
         'enabled' => env('IMAGE_TRANSFORM_CACHE_ENABLED', true),
         'lifetime' => env('IMAGE_TRANSFORM_CACHE_LIFETIME', 60 * 24 * 7), // 7 days
+        'disk' => env('IMAGE_TRANSFORM_CACHE_DISK', 'local'),
     ],
 
     /*
