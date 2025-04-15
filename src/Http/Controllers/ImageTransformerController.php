@@ -38,10 +38,10 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
             if (File::exists($cachePath)) {
                 if (Cache::has('image-transform-url:'.$cachePath)) {
-                return response(File::get($cachePath), 200, [
-                    'Content-Type' => File::mimeType($cachePath),
-                    'X-Cache' => 'HIT',
-                ]);
+                    return response(File::get($cachePath), 200, [
+                        'Content-Type' => File::mimeType($cachePath),
+                        'X-Cache' => 'HIT',
+                    ]);
                 } else {
                     // Cache expired, delete the cache file and continue
                     File::delete($cachePath);
@@ -101,7 +101,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
                 $cacheDir = dirname($cachePath);
 
                 File::ensureDirectoryExists($cacheDir);
-                File::put($cachePath, $encoded);
+                File::put($cachePath, $encoded->toString());
 
                 Cache::put(
                     key: 'image-transform-url:'.$cachePath,
@@ -111,7 +111,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             });
         }
 
-        return response($encoded, 200, [
+        return response($encoded->toString(), 200, [
             'Content-Type' => $encoded->mimetype(),
             ...(config()->boolean('image-transform-url.cache.enabled') ? [
                 'X-Cache' => 'MISS',
