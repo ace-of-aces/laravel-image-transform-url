@@ -79,7 +79,6 @@ it('can process the quality option', function () {
 
 it('can process the blur option', function () {
     /** @var TestCase $this */
-
     $response = $this->get(route('image.transform', [
         'options' => 'blur=20',
         'path' => 'cat.jpg',

@@ -140,7 +140,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             })
             ->filter(function ($value, $key) use ($allowedOptions) {
                 return array_key_exists($key, $allowedOptions) && gettype($value) === $allowedOptions[$key];
-            })->filter(function ($value, $key) use ($allowedOptions) {
+            })->filter(function ($value, $key) {
                 return in_array($key, config()->array('image-transform-url.enabled_options'), true);
             })->toArray();
     }
@@ -184,7 +184,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     /**
      * Get the select option value of the given option (if it exists).
      *
-     * @param array<string> $allowedValues
+     * @param  array<string>  $allowedValues
      */
     protected function getSelectOptionValue(array $options, string $option, array $allowedValues, ?string $default = null): ?string
     {
