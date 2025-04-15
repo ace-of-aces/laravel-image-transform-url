@@ -165,7 +165,9 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         return collect($options)
             ->mapWithKeys(function ($option) {
-                [$key, $value] = explode('=', $option);
+                [$key] = explode('=', $option);
+
+                $value = explode('=', $option)[1] ?? null;
 
                 $value = is_numeric($value) ? (int) $value : $value;
 
