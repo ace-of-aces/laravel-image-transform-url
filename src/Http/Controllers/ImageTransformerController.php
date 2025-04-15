@@ -200,6 +200,6 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
 
-        return storage_path('framework/cache/images/'.$pathPrefix.'/'.json_encode($options).$path);
+        return realpath(storage_path('framework/cache/images/'.$pathPrefix.'/'.json_encode($options).$path));
     }
 }
