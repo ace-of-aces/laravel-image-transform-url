@@ -6,7 +6,7 @@ use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 
 beforeEach(function () {
     Cache::flush();
-    Storage::fake('local');
+    Storage::fake(config()->string('image-transform-url.cache.disk'));
 });
 
 it('can serve from the cache after identical requests', function () {
