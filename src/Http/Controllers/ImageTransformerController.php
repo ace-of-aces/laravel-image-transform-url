@@ -56,6 +56,21 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             $image->blur($this->getPositiveIntOptionValue($options, 'blur', 100));
         }
 
+        if (Arr::has($options, 'contrast')) {
+            $image->contrast($this->getUnsignedIntOptionValue($options, 'contrast', 0, -100, 100));
+        }
+
+        if (Arr::has($options, 'flip')) {
+            $flip = $this->getSelectOptionValue($options, 'flip', ['h', 'v', 'hv'], 'h');
+
+            match ($flip) {
+                'h' => $image->flip(),
+                'v' => $image->flop(),
+                'hv' => $image->flip()->flop(),
+                default => null,
+            };
+        }
+
         // We use the mime type instead of the extension to determine the format, because this is more reliable.
         $originalMimetype = File::mimeType($publicPath);
 
@@ -125,11 +140,13 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             })
             ->filter(function ($value, $key) use ($allowedOptions) {
                 return array_key_exists($key, $allowedOptions) && gettype($value) === $allowedOptions[$key];
+            })->filter(function ($value, $key) use ($allowedOptions) {
+                return in_array($key, config()->array('image-transform-url.enabled_options'), true);
             })->toArray();
     }
 
     /**
-     * Get the int value of the given option (if it exists).
+     * Get the positive int value of the given option (if it exists).
      */
     protected static function getPositiveIntOptionValue(array $options, string $option, ?int $max = null, ?int $fallback = null): ?int
     {
@@ -142,12 +159,38 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     }
 
     /**
+     * Get the unsigned int value of the given option (if it exists).
+     */
+    protected static function getUnsignedIntOptionValue(array $options, string $option, ?int $fallback = null, ?int $min = null, ?int $max = null): ?int
+    {
+        return min(
+            max(
+                Arr::get($options, $option, $fallback),
+                $min ?? PHP_INT_MIN,
+            ),
+            $max ?? PHP_INT_MAX,
+        );
+    }
+
+    /**
      * Get the string value of the given option (if it exists).
      */
     protected function getStringOptionValue(array $options, string $option, ?string $default = null): ?string
     {
         return Arr::get($options, $option, $default);
 
+    }
+
+    /**
+     * Get the select option value of the given option (if it exists).
+     *
+     * @param array<string> $allowedValues
+     */
+    protected function getSelectOptionValue(array $options, string $option, array $allowedValues, ?string $default = null): ?string
+    {
+        $value = Arr::get($options, $option, $default);
+
+        return in_array($value, $allowedValues, true) ? $value : null;
     }
 
     /**

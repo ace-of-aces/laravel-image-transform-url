@@ -11,6 +11,8 @@ enum AllowedOptions: string
     case Format = 'format';
     case Quality = 'quality';
     case Blur = 'blur';
+    case Contrast = 'contrast';
+    case Flip = 'flip';
 
     public static function all(): array
     {
@@ -25,6 +27,8 @@ enum AllowedOptions: string
             self::Format->value => 'string',
             self::Quality->value => 'integer',
             self::Blur->value => 'integer',
+            self::Contrast->value => 'integer',
+            self::Flip->value => 'string',
         ];
     }
 }

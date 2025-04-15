@@ -27,19 +27,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Rate Limit
+    | Enabled Options
     |--------------------------------------------------------------------------
     |
-    | Below you may configure the rate limit which is applied for each image
-    | and IP address. It is recommended to set this to a low value, e.g. 2
-    | requests per minute, to prevent abuse. This setting is only
-    | effective in production mode.
+    | Here you may configure the options which are enabled for the image
+    | transformer.
+    |
     */
 
-    'rate_limit' => [
-        'max_attempts' => env('IMAGE_TRANSFORM_RATE_LIMIT_MAX_REQUESTS', 2),
-        'decay_seconds' => env('IMAGE_TRANSFORM_RATE_LIMIT_DECAY_SECONDS', 60),
-    ],
+    'enabled_options' => env('IMAGE_TRANSFORM_ENABLED_OPTIONS', [
+        'width',
+        'height',
+        'format',
+        'quality',
+        'flip',
+        // 'blur'
+    ]),
 
     /*
     |--------------------------------------------------------------------------

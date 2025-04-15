@@ -12,6 +12,8 @@ class TestCase extends Orchestra
 {
     use WithWorkbench;
 
+    protected $loadEnvironmentVariables = false;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,6 +41,13 @@ class TestCase extends Orchestra
     {
         tap($app['config'], function (Repository $config) {
             $config->set('image-transform-url.public_path', 'test-data');
+            $config->set('image-transform-url.enabled_options', [
+                'width',
+                'height',
+                'blur',
+                'contrast',
+                'format',
+            ]);
         });
     }
 }

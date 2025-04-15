@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AceOfAces\LaravelImageTransformUrl\Enums;
 
 enum AllowedMimeTypes: string

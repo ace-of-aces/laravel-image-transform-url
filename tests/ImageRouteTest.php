@@ -77,6 +77,45 @@ it('can process the quality option', function () {
     ]);
 });
 
+it('can process the blur option', function () {
+    /** @var TestCase $this */
+
+    $response = $this->get(route('image.transform', [
+        'options' => 'blur=20',
+        'path' => 'cat.jpg',
+    ]));
+
+    expect($response)->toBeImage([
+        'mime' => 'image/jpeg',
+        // TODO: add blur check
+    ]);
+});
+
+it('can process the flip option', function () {
+    $response = $this->get(route('image.transform', [
+        'options' => 'flip=hv',
+        'path' => 'cat.jpg',
+    ]));
+
+    expect($response)->toBeImage([
+        'mime' => 'image/jpeg',
+        // TODO: add flip check
+    ]);
+});
+
+it('can process the contrast option', function () {
+    /** @var TestCase $this */
+    $response = $this->get(route('image.transform', [
+        'options' => 'contrast=-50',
+        'path' => 'cat.jpg',
+    ]));
+
+    expect($response)->toBeImage([
+        'mime' => 'image/jpeg',
+        // TODO: add contrast check
+    ]);
+});
+
 it('can process multiple options at once', function () {
     /** @var TestCase $this */
     $response = $this->get(route('image.transform', [
@@ -87,7 +126,7 @@ it('can process multiple options at once', function () {
     expect($response)->toBeImage([
         'width' => 100,
         'mime' => 'image/gif',
-        // TODO: add quality check
+        // TODO: add more checks
     ]);
 });
 

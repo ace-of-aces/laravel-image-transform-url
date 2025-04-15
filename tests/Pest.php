@@ -4,6 +4,7 @@ use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Testing\TestResponse;
 use Intervention\Gif\Exceptions\NotReadableException;
 use Intervention\Image\Laravel\Facades\Image;
+use Pest\Expectation;
 
 uses(TestCase::class)->in(__DIR__);
 
@@ -20,12 +21,13 @@ uses(TestCase::class)->in(__DIR__);
 */
 
 expect()->extend('toBeImage', function (array $options = []) {
+
+    /** @var Expectation $this */
     // $this->value here is the value passed to expect(), which should be a TestResponse
     if (! $this->value instanceof TestResponse) {
         throw new InvalidArgumentException('Value passed to toBeImage() must be an instance of Illuminate\Testing\TestResponse.');
     }
 
-    /** @var TestResponse $response */
     $response = $this->value;
 
     // Basic checks
@@ -38,9 +40,7 @@ expect()->extend('toBeImage', function (array $options = []) {
     // Image content validation
     $imageContent = $response->getContent();
 
-    if (empty($imageContent)) {
-        return $this->fail('Response content is empty.');
-    }
+    expect($imageContent)->toBeString()->not->toBeEmpty();
 
     try {
         $image = Image::read($imageContent);
@@ -56,6 +56,6 @@ expect()->extend('toBeImage', function (array $options = []) {
         return $this;
 
     } catch (NotReadableException $e) {
-        return $this->fail('Response content is not a readable image: '.$e->getMessage());
+        expect()->not->toThrow($e);
     }
 });
