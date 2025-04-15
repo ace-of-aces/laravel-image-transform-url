@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
 use Intervention\Image\Encoders\AutoEncoder;
@@ -47,6 +48,10 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
                     File::delete($cachePath);
                 }
             }
+        }
+
+        if (config()->boolean('image-transform-url.rate_limit.enabled')) {
+            $this->rateLimit($request, $path);
         }
 
         $image = Image::read($publicPath);
@@ -118,6 +123,23 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             ] : []),
         ]);
 
+    }
+
+    /**
+     * Rate limit the request.
+     */
+    protected function rateLimit(Request $request, string $path): void
+    {
+        $key = 'image-transform-url:'.$request->ip().':'.$path;
+
+        $passed = RateLimiter::attempt(
+            key: $key,
+            maxAttempts: config()->integer('image-transform-url.rate_limit.max_attempts'),
+            callback: fn () => true,
+            decaySeconds: config()->integer('image-transform-url.rate_limit.decay_seconds'),
+        );
+
+        abort_unless($passed, 429, 'Too many requests. Please try again later.');
     }
 
     /**
