@@ -16,8 +16,8 @@ Easy, URL-based image transformations inspired by [Cloudflare Images](https://de
 
 ## Requirements
 
-- \>= PHP 8.4
-- Laravel 12.x
+-   \>= PHP 8.4
+-   Laravel 12.x
 
 > [!IMPORTANT]
 > It is highly recommended to set a minimum memory limit of 256MB in your `php.ini` file to avoid memory issues when images are being processed.
@@ -43,14 +43,34 @@ php artisan vendor:publish --tag="image-transform-url-config"
 2. Test your first image transformation:
 
 Use the following URL format to transform your images:
+
 ```
 http://<domain>/<route-prefix>/<options>/<path-to-your-image.<extension>>
 ```
 
 for example:
+
 ```
 http://localhost:8000/image-transform/width=250,quality=80,format=webp/foo/bar/example.jpg
 ```
+
+## Options
+
+> [!INFO]
+> The options are separated by commas and their values are appended with equal signs. The order of options does not matter.
+
+| Option     | Description                          | Type   | Possible Values                                               |
+| ---------- | ------------------------------------ | ------ | ------------------------------------------------------------- |
+| `width`    | Set the width of the image.          | number | Values greater than the original width will be ignored.       |
+| `height`   | Set the height of the image.         | number | Values greater than the original height will be ignored.      |
+| `quality`  | Set the quality of the image.        | number | `0` to `100`                                                  |
+| `format`   | Set the format of the image.         | string | Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.       |
+| `blur`     | Set the blur level of the image.     | number | `0` to `100`                                                  |
+| `contrast` | Set the contrast level of the image. | number | `-100` to `100`                                               |
+| `flip`     | Flip the image.                      | string | `h`(horizontal), `v`(vertical), `hv`(horizontal and vertical) |
+
+> [!CAUTION]
+> The `blur` option is a resource-intensive operation and may cause memory issues if the image is too large. It is recommended to use this option with caution, or disable it in the config.
 
 ## Testing
 
@@ -68,8 +88,9 @@ TODO
 
 ## Credits
 
-- [Aaron Francis](https://github.com/aarondfrancis) for the [original idea and foundational work](https://aaronfrancis.com/2025/a-cookieless-cache-friendly-image-proxy-in-laravel-inspired-by-cloudflare-9e95f7e0)
-- [Cloudflare Images](https://developers.cloudflare.com/images/transform-images/transform-via-url/) for the URL-Syntax structure
+-   [Aaron Francis](https://github.com/aarondfrancis) for the [original idea and foundational work](https://aaronfrancis.com/2025/a-cookieless-cache-friendly-image-proxy-in-laravel-inspired-by-cloudflare-9e95f7e0)
+-   [Cloudflare Images](https://developers.cloudflare.com/images/transform-images/transform-via-url/) for the URL-Syntax structure
+-   [Intervention Image](https://image.intervention.io/v3) for the underlying image processing
 
 ## License
 
