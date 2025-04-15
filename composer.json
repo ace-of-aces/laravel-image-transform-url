@@ -80,10 +80,7 @@
         "laravel": {
             "providers": [
                 "AceOfAces\\LaravelImageTransformUrl\\LaravelImageTransformUrlServiceProvider"
-            ],
-            "aliases": {
-                "LaravelImageTransformUrl": "AceOfAces\\LaravelImageTransformUrl\\Facades\\LaravelImageTransformUrl"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
