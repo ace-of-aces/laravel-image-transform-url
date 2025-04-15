@@ -2,6 +2,7 @@
 
 namespace AceOfAces\LaravelImageTransformUrl\Tests;
 
+use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\LaravelImageTransformUrlServiceProvider;
 use Illuminate\Contracts\Config\Repository;
 use Intervention\Image\Laravel\ServiceProvider as InterventionImageServiceProvider;
@@ -41,13 +42,7 @@ class TestCase extends Orchestra
     {
         tap($app['config'], function (Repository $config) {
             $config->set('image-transform-url.public_path', 'test-data');
-            $config->set('image-transform-url.enabled_options', [
-                'width',
-                'height',
-                'blur',
-                'contrast',
-                'format',
-            ]);
+            $config->set('image-transform-url.enabled_options',AllowedOptions::all());
         });
     }
 }
