@@ -6,7 +6,9 @@ namespace AceOfAces\LaravelImageTransformUrl\Http\Controllers;
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
+use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
@@ -21,6 +23,8 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class ImageTransformerController extends \Illuminate\Routing\Controller
 {
+    use ResolvesOptions;
+
     public function __invoke(Request $request, string $options, string $path)
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
@@ -39,10 +43,12 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
             if (File::exists($cachePath)) {
                 if (Cache::has('image-transform-url:'.$cachePath)) {
-                    return response(File::get($cachePath), 200, [
-                        'Content-Type' => File::mimeType($cachePath),
-                        'X-Cache' => 'HIT',
-                    ]);
+                    // serve file from storage
+                    return $this->imageResponse(
+                        imageContent: File::get($cachePath),
+                        mimeType: File::mimeType($cachePath),
+                        cacheHit: true
+                    );
                 } else {
                     // Cache expired, delete the cache file and continue
                     File::delete($cachePath);
@@ -116,12 +122,11 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             });
         }
 
-        return response($encoded->toString(), 200, [
-            'Content-Type' => $encoded->mimetype(),
-            ...(config()->boolean('image-transform-url.cache.enabled') ? [
-                'X-Cache' => 'MISS',
-            ] : []),
-        ]);
+        return $this->imageResponse(
+            imageContent: $encoded->toString(),
+            mimeType: $encoded->mimetype(),
+            cacheHit: false
+        );
 
     }
 
@@ -174,62 +179,28 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     }
 
     /**
-     * Get the positive int value of the given option (if it exists).
-     */
-    protected static function getPositiveIntOptionValue(array $options, string $option, ?int $max = null, ?int $fallback = null): ?int
-    {
-        $value = min(
-            Arr::get($options, $option, $fallback),
-            $max ?? PHP_INT_MAX,
-        );
-
-        return $value > 0 ? $value : null;
-    }
-
-    /**
-     * Get the unsigned int value of the given option (if it exists).
-     */
-    protected static function getUnsignedIntOptionValue(array $options, string $option, ?int $fallback = null, ?int $min = null, ?int $max = null): ?int
-    {
-        return min(
-            max(
-                Arr::get($options, $option, $fallback),
-                $min ?? PHP_INT_MIN,
-            ),
-            $max ?? PHP_INT_MAX,
-        );
-    }
-
-    /**
-     * Get the string value of the given option (if it exists).
-     */
-    protected function getStringOptionValue(array $options, string $option, ?string $default = null): ?string
-    {
-        return Arr::get($options, $option, $default);
-
-    }
-
-    /**
-     * Get the select option value of the given option (if it exists).
-     *
-     * @param  array<string>  $allowedValues
-     */
-    protected function getSelectOptionValue(array $options, string $option, array $allowedValues, ?string $default = null): ?string
-    {
-        $value = Arr::get($options, $option, $default);
-
-        return in_array($value, $allowedValues, true) ? $value : null;
-    }
-
-    /**
      * Get the cache path for the given path and options.
      */
-    protected function getCachePath(string $path, array $options): string
+    protected static function getCachePath(string $path, array $options): string
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
 
         $optionsHash = md5(json_encode($options));
 
         return Storage::disk(config()->string('image-transform-url.cache.disk'))->path('_cache/image-transform-url/'.$pathPrefix.'/'.$optionsHash.'_'.$path);
+    }
+
+    /**
+     * Respond with the image content.
+     */
+    protected static function imageResponse(string $imageContent, string $mimeType, bool $cacheHit = false): Response
+    {
+        return response($imageContent, 200, [
+            'Content-Type' => $mimeType,
+            ...(config()->boolean('image-transform-url.cache.enabled') ? [
+                'X-Cache' => $cacheHit ? 'HIT' : 'MISS',
+            ] : []),
+            ...(config()->array('image-transform-url.headers') ?? []),
+        ]);
     }
 }
