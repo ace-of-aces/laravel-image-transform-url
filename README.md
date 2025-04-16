@@ -16,7 +16,7 @@ Easy, URL-based image transformations inspired by [Cloudflare Images](https://de
 
 ## Requirements
 
--   \>= PHP 8.4
+-   PHP \>= 8.4
 -   Laravel 12.x
 
 If you want to use the file caching feature (highly recommended), a configured `Storage` disk with a `local` driver is required.
