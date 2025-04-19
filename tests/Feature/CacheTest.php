@@ -30,7 +30,6 @@ it('can serve from the cache after identical requests', function () {
 
 it('can use the version option to revalidate the cache', function () {
     /** @var TestCase $this */
-
     $response = $this->get(route('image.transform', [
         'options' => 'version=1',
         'path' => 'cat.jpg',

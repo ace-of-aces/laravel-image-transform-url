@@ -18,7 +18,7 @@ it('can convert from jpeg to all other allowed mime types', function () {
     foreach ($allowedMimeTypes as $allowed) {
         /** @var TestCase $this */
         $response = $this->get(route('image.transform', [
-            'options' => 'format=' . $allowed['extension'],
+            'options' => 'format='.$allowed['extension'],
             'path' => 'cat.jpg',
         ]));
 
@@ -36,7 +36,7 @@ it('can convert from gif to all other allowed mime types', function () {
     foreach ($allowedMimeTypes as $allowed) {
         /** @var TestCase $this */
         $response = $this->get(route('image.transform', [
-            'options' => 'format=' . $allowed['extension'],
+            'options' => 'format='.$allowed['extension'],
             'path' => 'cat-kiss.gif',
         ]));
 
@@ -54,7 +54,7 @@ it('can convert from png to all other allowed mime types', function () {
     foreach ($allowedMimeTypes as $allowed) {
         /** @var TestCase $this */
         $response = $this->get(route('image.transform', [
-            'options' => 'format=' . $allowed['extension'],
+            'options' => 'format='.$allowed['extension'],
             'path' => 'cat.png',
         ]));
 
@@ -71,7 +71,7 @@ it('can convert from webp to all other allowed mime types', function () {
     foreach ($allowedMimeTypes as $allowed) {
         /** @var TestCase $this */
         $response = $this->get(route('image.transform', [
-            'options' => 'format=' . $allowed['extension'],
+            'options' => 'format='.$allowed['extension'],
             'path' => 'cat.webp',
         ]));
 
