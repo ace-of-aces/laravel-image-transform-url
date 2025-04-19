@@ -40,14 +40,15 @@ php artisan vendor:publish --tag="image-transform-url-config"
 
 ## Usage
 
-1. Configure the package via `config/image-transform-url.php` to set your `public_path`, from where you want to transform the images.
+1. Configure the package via `config/image-transform-url.php` to set your [`public_path`](https://laravel.com/docs/12.x/helpers#method-public-path) directory, from where you want to transform the images.
+   It is recommended to use a dedicated directory for your images in order to have a separation of concerns.
 
 2. Test your first image transformation:
 
 Use the following URL format to transform your images:
 
 ```
-http://<domain>/<route-prefix>/<options>/<path-to-your-image.<extension>>
+http://<domain>/<route-prefix>/<options>/<path-to-your-image.<jpg|jpeg|png|gif|webp>>
 ```
 
 for example:
@@ -96,6 +97,38 @@ To force a revalidation, you can either:
 2.  move it into another subdirectory, which will change its path
 3.  change the version number (integer) in the options (e.g. `version=2`)
 4.  or flush the entire cache of your application using the `php artisan cache:clear` command.
+
+## Usage with CDNs
+
+This package is designed to work seamlessly with CDNs like Cloudflare, BunnyCDN, and others.
+
+The most important configuration is the [`Cache-Control`](https://developer.mozilla.org/de/docs/Web/HTTP/Reference/Headers/Cache-Control) header, which you can customize to your liking in the `image-transform-url.php` configuration file.
+
+## Error Handling
+
+The route handler of this package is designed to be robust against invalid options, paths and file names, while also not exposing additional information of your applications public directory structure.
+
+This is why the route handler will return a `404` response if:
+
+-   a requested image does not existn at the specified path
+-   the requested image is not a valid image file
+-   the provided options are not in the correct format (`key=value`, no trailing comma, etc.)
+
+The only other HTTP error that can be returned is a `429` response, which indicates that the request was rate-limited.
+
+If parts of the given route options are invalid, the route handler will ignore them and only apply the valid options.
+
+Example:
+
+```
+http://localhost:8000/image-transform/width=250,quality=foo,format=webp/example.jpg
+```
+
+will be processed as:
+
+```
+http://localhost:8000/image-transform/width=250,format=webp/example.jpg
+```
 
 ## Testing
 
