@@ -61,18 +61,41 @@ http://localhost:8000/image-transform/width=250,quality=80,format=webp/foo/bar/e
 > [!NOTE]
 > The options are separated by commas and their values are appended with equal signs. The order of options does not matter.
 
-| Option     | Description                          | Type   | Possible Values                                               |
-| ---------- | ------------------------------------ | ------ | ------------------------------------------------------------- |
-| `width`    | Set the width of the image.          | number | Values greater than the original width will be ignored.       |
-| `height`   | Set the height of the image.         | number | Values greater than the original height will be ignored.      |
-| `quality`  | Set the quality of the image.        | number | `0` to `100`                                                  |
-| `format`   | Set the format of the image.         | string | Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.       |
-| `blur`     | Set the blur level of the image.     | number | `0` to `100`                                                  |
-| `contrast` | Set the contrast level of the image. | number | `-100` to `100`                                               |
-| `flip`     | Flip the image.                      | string | `h`(horizontal), `v`(vertical), `hv`(horizontal and vertical) |
+| Option     | Description                          | Type    | Description / Possible Values                                                   |
+| ---------- | ------------------------------------ | ------- | ------------------------------------------------------------------------------- |
+| `width`    | Set the width of the image.          | integer | Values greater than the original width will be ignored.                         |
+| `height`   | Set the height of the image.         | integer | Values greater than the original height will be ignored.                        |
+| `quality`  | Set the quality of the image.        | integer | `0` to `100`                                                                    |
+| `format`   | Set the format of the image.         | string  | Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.                         |
+| `blur`     | Set the blur level of the image.     | integer | `0` to `100`                                                                    |
+| `contrast` | Set the contrast level of the image. | integer | `-100` to `100`                                                                 |
+| `flip`     | Flip the image.                      | string  | `h`(horizontal), `v`(vertical), `hv`(horizontal and vertical)                   |
+| `version`  | Version number of the image.         | integer | Any positive integer. More info in the [Image Caching](#image-caching) section. |
 
 > [!CAUTION]
 > The `blur` option is a resource-intensive operation and may cause memory issues if the image is too large. It is recommended to use this option with caution, or disable it in the config.
+
+## Image Caching
+
+This package comes with the default option to automatically store and serve images statically for the requested options within the caching lifetime.
+
+> [!NOTE]
+> Having this feature enabled (default behavior) will help to reduce the load on your server and speed up image delivery.
+
+The processed images are stored in the `storage/app/private/_cache/image-transform-url` directory by default. You can change the disk configuration in the `image-transform-url.php` configuration file.
+
+> [!CAUTION]
+> When using this option, there is one caveat to be aware of:
+
+Source images are considered to be stale content by their file name and path.
+
+If the content of an original source image changes, but the file name stays the same, the cached images will not be updated automatically until the cache expires.
+To force a revalidation, you can either:
+
+1.  change the image's file name
+2.  move it into another subdirectory, which will change its path
+3.  change the version number (integer) in the options (e.g. `version=2`)
+4.  or flush the entire cache of your application using the `php artisan cache:clear` command.
 
 ## Testing
 
