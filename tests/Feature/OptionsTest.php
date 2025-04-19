@@ -56,7 +56,6 @@ it('can process the quality option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
-        // TODO: add quality check
     ]);
 });
 
@@ -69,7 +68,6 @@ it('can process the blur option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
-        // TODO: add blur check
     ]);
 });
 
@@ -81,7 +79,6 @@ it('can process the flip option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
-        // TODO: add flip check
     ]);
 });
 
@@ -94,7 +91,6 @@ it('can process the contrast option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
-        // TODO: add contrast check
     ]);
 });
 
@@ -108,7 +104,6 @@ it('can process multiple options at once', function () {
     expect($response)->toBeImage([
         'width' => 100,
         'mime' => 'image/gif',
-        // TODO: add more checks
     ]);
 });
 
