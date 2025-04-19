@@ -15,4 +15,20 @@ enum AllowedMimeTypes: string
     {
         return array_map(fn (self $mimeType) => $mimeType->value, self::cases());
     }
+
+    public static function withExtension(): array
+    {
+        return array_map(
+            fn (self $mimeType) => [
+                'mime' => $mimeType->value,
+                'extension' => match ($mimeType) {
+                    self::Jpeg => 'jpg',
+                    self::Png => 'png',
+                    self::Webp => 'webp',
+                    self::Gif => 'gif',
+                },
+            ],
+            self::cases()
+        );
+    }
 }
