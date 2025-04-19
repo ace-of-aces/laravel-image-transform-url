@@ -42,6 +42,7 @@ return [
         'quality',
         'flip',
         'contrast',
+        'version',
         // 'blur'
     ]),
 

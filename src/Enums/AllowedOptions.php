@@ -13,6 +13,7 @@ enum AllowedOptions: string
     case Blur = 'blur';
     case Contrast = 'contrast';
     case Flip = 'flip';
+    case Version = 'version';
 
     public static function all(): array
     {
@@ -29,6 +30,7 @@ enum AllowedOptions: string
             self::Blur->value => 'integer',
             self::Contrast->value => 'integer',
             self::Flip->value => 'string',
+            self::Version->value => 'integer',
         ];
     }
 }
