@@ -130,19 +130,13 @@ will be processed as:
 http://localhost:8000/image-transform/width=250,format=webp/example.jpg
 ```
 
-## Testing
-
-```bash
-composer test
-```
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
-TODO
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
