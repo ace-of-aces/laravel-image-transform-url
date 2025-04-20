@@ -40,7 +40,7 @@ php artisan vendor:publish --tag="image-transform-url-config"
 
 ## Usage
 
-1. Configure the package via `config/image-transform-url.php` to set your [`public_path`](https://laravel.com/docs/12.x/helpers#method-public-path) directory, from where you want to transform the images.
+1. Configure the package via `image-transform-url.php` to set your [`public_path`](https://laravel.com/docs/12.x/helpers#method-public-path) directory, from where you want to transform the images.
    It is recommended to use a dedicated directory for your images in order to have a separation of concerns.
 
 2. Test your first image transformation:
@@ -98,9 +98,17 @@ To force a revalidation, you can either:
 3.  change the version number (integer) in the options (e.g. `version=2`)
 4.  or flush the entire cache of your application using the `php artisan cache:clear` command.
 
+## Rate Limiting
+
+Another feature of this package is the ability to limit the number of transformations that the image transformation route should process per path and IP address within a given time frame.
+
+The rate limit will come into effect for new transformation requests only, and will not affect previously cached images. It is also only applied in the `production` environment.
+
+You can configure the rate limit settings in the `image-transform-url.php` configuration file.
+
 ## Usage with CDNs
 
-This package is designed to work seamlessly with CDNs like Cloudflare, BunnyCDN, and others.
+The package is designed to work seamlessly with CDNs like Cloudflare, BunnyCDN, and others.
 
 The most important configuration is the [`Cache-Control`](https://developer.mozilla.org/de/docs/Web/HTTP/Reference/Headers/Cache-Control) header, which you can customize to your liking in the `image-transform-url.php` configuration file.
 
