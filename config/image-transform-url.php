@@ -76,7 +76,7 @@ return [
     */
 
     'rate_limit' => [
-        'enabled' => env('IMAGE_TRANSFORM_RATE_LIMIT_ENABLED', app()->isProduction()),
+        'enabled' => env('IMAGE_TRANSFORM_RATE_LIMIT_ENABLED', true),
         'max_attempts' => env('IMAGE_TRANSFORM_RATE_LIMIT_MAX_REQUESTS', 2),
         'decay_seconds' => env('IMAGE_TRANSFORM_RATE_LIMIT_DECAY_SECONDS', 60),
     ],
