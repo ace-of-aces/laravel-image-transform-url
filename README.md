@@ -19,7 +19,7 @@ Easy, URL-based image transformations inspired by [Cloudflare Images](https://de
 -   PHP \>= 8.4
 -   Laravel 12.x
 
-If you want to use the file caching feature (highly recommended), a configured `Storage` disk with a `local` driver is required.
+If you want to use the file caching feature (highly recommended), a configured `Storage` disk and a `Cache` driver is required. More info in the [Image Caching](#image-caching) section.
 
 > [!IMPORTANT]
 > It is highly recommended to set a minimum memory limit of 256MB in your `php.ini` file to avoid memory issues when images are being processed.
