@@ -77,6 +77,10 @@ return [
 
     'rate_limit' => [
         'enabled' => env('IMAGE_TRANSFORM_RATE_LIMIT_ENABLED', true),
+        'disabled_for_environments' => [
+            'local',
+            'testing',
+        ],
         'max_attempts' => env('IMAGE_TRANSFORM_RATE_LIMIT_MAX_REQUESTS', 2),
         'decay_seconds' => env('IMAGE_TRANSFORM_RATE_LIMIT_DECAY_SECONDS', 60),
     ],

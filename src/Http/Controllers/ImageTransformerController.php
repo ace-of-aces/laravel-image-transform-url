@@ -10,6 +10,7 @@ use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
@@ -56,7 +57,9 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             }
         }
 
-        if (config()->boolean('image-transform-url.rate_limit.enabled')) {
+        if (
+            config()->boolean('image-transform-url.rate_limit.enabled') &&
+            ! in_array(App::environment(), config()->array('image-transform-url.rate_limit.disabled_for_environments'))) {
             $this->rateLimit($request, $path);
         }
 
