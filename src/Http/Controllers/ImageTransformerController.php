@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\GifEncoder;
@@ -30,11 +31,13 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     {
         $pathPrefix = config()->string('image-transform-url.public_path');
 
-        $publicPath = public_path($pathPrefix.'/'.$path);
+        $publicPath = realpath(public_path($pathPrefix.'/'.$path));
 
-        abort_if(File::missing($publicPath), 404);
+        abort_unless($publicPath, 404);
 
-        abort_if(! in_array(File::mimeType($publicPath), AllowedMimeTypes::all(), true), 404);
+        abort_unless(Str::startsWith($publicPath, public_path($pathPrefix)), 404);
+
+        abort_unless(in_array(File::mimeType($publicPath), AllowedMimeTypes::all(), true), 404);
 
         $options = $this->parseOptions($options);
 
