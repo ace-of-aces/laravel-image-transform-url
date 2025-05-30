@@ -62,16 +62,17 @@ http://localhost:8000/image-transform/width=250,quality=80,format=webp/foo/bar/e
 > [!NOTE]
 > The options are separated by commas and their values are appended with equal signs. The order of options does not matter.
 
-| Option     | Description                          | Type    | Description / Possible Values                                                   |
-| ---------- | ------------------------------------ | ------- | ------------------------------------------------------------------------------- |
-| `width`    | Set the width of the image.          | integer | Values greater than the original width will be ignored.                         |
-| `height`   | Set the height of the image.         | integer | Values greater than the original height will be ignored.                        |
-| `quality`  | Set the quality of the image.        | integer | `0` to `100`                                                                    |
-| `format`   | Set the format of the image.         | string  | Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.                         |
-| `blur`     | Set the blur level of the image.     | integer | `0` to `100`                                                                    |
-| `contrast` | Set the contrast level of the image. | integer | `-100` to `100`                                                                 |
-| `flip`     | Flip the image.                      | string  | `h`(horizontal), `v`(vertical), `hv`(horizontal and vertical)                   |
-| `version`  | Version number of the image.         | integer | Any positive integer. More info in the [Image Caching](#image-caching) section. |
+| Option       | Description                           | Type    | Description / Possible Values                                                           |
+| ------------ | ------------------------------------- | ------- | --------------------------------------------------------------------------------------- |
+| `width`      | Set the width of the image.           | integer | Values greater than the original width will be ignored.                                 |
+| `height`     | Set the height of the image.          | integer | Values greater than the original height will be ignored.                                |
+| `quality`    | Set the quality of the image.         | integer | `0` to `100`                                                                            |
+| `format`     | Set the format of the image.          | string  | Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.                                 |
+| `blur`       | Set the blur level of the image.      | integer | `0` to `100`                                                                            |
+| `contrast`   | Set the contrast level of the image.  | integer | `-100` to `100`                                                                         |
+| `background` | Set the background color of the image | string  | Any valid HEX color value (without a leading `#`). Only supported for the `png` format. |
+| `flip`       | Flip the image.                       | string  | `h`(horizontal), `v`(vertical), `hv`(horizontal and vertical)                           |
+| `version`    | Version number of the image.          | integer | Any positive integer. More info in the [Image Caching](#image-caching) section.         |
 
 > [!CAUTION]
 > The `blur` option is a resource-intensive operation and may cause memory issues if the image is too large. It is recommended to use this option with caution, or disable it in the config.
