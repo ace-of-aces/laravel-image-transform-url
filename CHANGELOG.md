@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v0.4.0 - 2025-05-30
+
+This version adds a new `background` option which can be used to set a HEX color to transparent areas of png images.
+
 ## v0.3.0 - 2025-04-21
 
 This version fixes adds checks against a possible path traversal attack vector in the ImageTransformerController.
