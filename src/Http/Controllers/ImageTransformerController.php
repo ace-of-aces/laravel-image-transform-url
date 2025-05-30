@@ -94,6 +94,19 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             };
         }
 
+        if (Arr::has($options, 'background')) {
+            $backgroundColor = $this->getStringOptionValue($options, 'background', 'ffffff');
+
+            if (! preg_match('/^([a-f0-9]{6}|[a-f0-9]{3})$/', $backgroundColor)) {
+                $backgroundColor = null;
+            }
+
+            if ($backgroundColor) {
+                $image->blendTransparency($backgroundColor);
+            }
+
+        }
+
         // We use the mime type instead of the extension to determine the format, because this is more reliable.
         $originalMimetype = File::mimeType($publicPath);
 

@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Cache::flush();
@@ -91,6 +93,18 @@ it('can process the contrast option', function () {
 
     expect($response)->toBeImage([
         'mime' => 'image/jpeg',
+    ]);
+});
+
+it('can process the background option', function () {
+    /** @var TestCase $this */
+    $response = $this->get(route('image.transform', [
+        'options' => 'background=ffaa00',
+        'path' => 'octocat.png',
+    ]));
+
+    expect($response)->toBeImage([
+        'mime' => 'image/png',
     ]);
 });
 

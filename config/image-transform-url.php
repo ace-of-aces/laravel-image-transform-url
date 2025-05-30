@@ -43,6 +43,7 @@ return [
         'flip',
         'contrast',
         'version',
+        'background',
         // 'blur'
     ]),
 
