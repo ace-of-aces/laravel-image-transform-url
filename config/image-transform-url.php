@@ -3,16 +3,35 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Public Path
+    | Source Directories
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the public path/prefix where the images are stored.
-    | If you are storing the images in 'storage/app/public', the typically
-    | linked public path would be 'storage'.
+    | Here you may configure the directories from which the image transformer
+    | is allowed to serve images. For security reasons, it is recommended
+    | to only allow directories which are already publicly accessible.
+    |
+    | Important: The public storage directory should be addressed directly via
+    | storage('app/public') instead of the public_path('storage') link.
     |
     */
 
-    'public_path' => env('IMAGE_TRANSFORM_PUBLIC_PATH', 'images'),
+    'source_directories' => [
+        'images' => public_path('images'),
+        'storage' => storage_path('app/public/images'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Source Directory
+    |--------------------------------------------------------------------------
+    |
+    | Below you may configure the default source directory which is used when
+    | no specific path prefix is provided in the URL. This should be one of
+    | the keys from the source_directories array.
+    |
+    */
+
+    'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images'),
 
     /*
     |--------------------------------------------------------------------------

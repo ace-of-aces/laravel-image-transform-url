@@ -27,23 +27,25 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 {
     use ResolvesOptions;
 
-    public function __invoke(Request $request, string $options, string $path)
+    public function transformWithPrefix(Request $request, string $pathPrefix, string $options, string $path)
     {
-        $pathPrefix = config()->string('image-transform-url.public_path');
+        return $this->handleTransform($request, $pathPrefix, $options, $path);
+    }
 
-        $publicPath = realpath(public_path($pathPrefix.'/'.$path));
+    public function transformDefault(Request $request, string $options, string $path)
+    {
+        return $this->handleTransform($request, null, $options, $path);
+    }
 
-        abort_unless($publicPath, 404);
-
-        abort_unless(Str::startsWith($publicPath, public_path($pathPrefix)), 404);
-
-        abort_unless(in_array(File::mimeType($publicPath), AllowedMimeTypes::all(), true), 404);
+    protected function handleTransform(Request $request, ?string $pathPrefix, string $options, ?string $path = null)
+    {
+        $realPath = $this->handlePath($pathPrefix, $path);
 
         $options = $this->parseOptions($options);
 
         // Check cache
         if (config()->boolean('image-transform-url.cache.enabled')) {
-            $cachePath = $this->getCachePath($path, $options);
+            $cachePath = $this->getCachePath($pathPrefix, $path, $options);
 
             if (File::exists($cachePath)) {
                 if (Cache::has('image-transform-url:'.$cachePath)) {
@@ -66,7 +68,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             $this->rateLimit($request, $path);
         }
 
-        $image = Image::read($publicPath);
+        $image = Image::read($realPath);
 
         if (Arr::hasAny($options, ['width', 'height'])) {
             $image->scale(
@@ -108,7 +110,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
         }
 
         // We use the mime type instead of the extension to determine the format, because this is more reliable.
-        $originalMimetype = File::mimeType($publicPath);
+        $originalMimetype = File::mimeType($realPath);
 
         $format = $this->getStringOptionValue($options, 'format', $originalMimetype);
         $quality = $this->getPositiveIntOptionValue($options, 'quality', 100, 100);
@@ -124,9 +126,9 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
         $encoded = $image->encode($encoder);
 
         if (config()->boolean('image-transform-url.cache.enabled')) {
-            defer(function () use ($path, $options, $encoded) {
+            defer(function () use ($pathPrefix, $path, $options, $encoded) {
 
-                $cachePath = $this->getCachePath($path, $options);
+                $cachePath = $this->getCachePath($pathPrefix, $path, $options);
 
                 $cacheDir = dirname($cachePath);
 
@@ -147,6 +149,40 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             cacheHit: false
         );
 
+    }
+
+    /**
+     * Handle the path and ensure it is valid.
+     */
+    protected function handlePath(?string &$pathPrefix, ?string &$path): string
+    {
+        if ($path === null) {
+            $path = $pathPrefix;
+            $pathPrefix = null;
+        }
+
+        $allowedSourceDirectories = config('image-transform-url.source_directories', []);
+
+        if (! $pathPrefix) {
+            $pathPrefix = config('image-transform-url.default_source_directory') ?? array_key_first($allowedSourceDirectories);
+        }
+
+        abort_unless(array_key_exists($pathPrefix, $allowedSourceDirectories), 404);
+
+        $basePath = $allowedSourceDirectories[$pathPrefix];
+        $requestedPath = $basePath.'/'.$path;
+        $realPath = realpath($requestedPath);
+
+        abort_unless($realPath, 404);
+
+        $allowedBasePath = realpath($basePath);
+        abort_unless($allowedBasePath, 404);
+
+        abort_unless(Str::startsWith($realPath, $allowedBasePath), 404);
+
+        abort_unless(in_array(File::mimeType($realPath), AllowedMimeTypes::all(), true), 404);
+
+        return $realPath;
     }
 
     /**
@@ -202,10 +238,8 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     /**
      * Get the cache path for the given path and options.
      */
-    protected static function getCachePath(string $path, array $options): string
+    protected static function getCachePath(string $pathPrefix, string $path, array $options): string
     {
-        $pathPrefix = config()->string('image-transform-url.public_path');
-
         $optionsHash = md5(json_encode($options));
 
         return Storage::disk(config()->string('image-transform-url.cache.disk'))->path('_cache/image-transform-url/'.$pathPrefix.'/'.$optionsHash.'_'.$path);
