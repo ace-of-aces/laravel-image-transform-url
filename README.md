@@ -38,18 +38,23 @@ Publish the config file with:
 php artisan vendor:publish --tag="image-transform-url-config"
 ```
 
-## Usage
+## Getting Started
 
-1. Configure the package via `image-transform-url.php` to set your [`public_path`](https://laravel.com/docs/12.x/helpers#method-public-path) directory, from where you want to transform the images.
-   It is recommended to use a dedicated directory for your images in order to have a separation of concerns.
+1. Configure the package via `image-transform-url.php` to set your `source_directories`, from where you want to transform the images. By default, the package will look for `images` directories in your `public` folder and in the `storage/app/public` directory.
+   It is recommended to use a dedicated subdirectory for your images in order to avoid conflicts with other files.
 
-2. Test your first image transformation:
+2. Choose a default source directory by setting the `default_source_directory` option in the `image-transform-url.php` configuration file. This will be used if no source directory is specified in the URL.
+
+3. Test your first image transformation:
 
 Use the following URL format to transform your images:
 
 ```
-http://<domain>/<route-prefix>/<options>/<path-to-your-image.<jpg|jpeg|png|gif|webp>>
+http://<domain>/<route-prefix>/<source-directory>/<options>/<path-to-your-image.<jpg|jpeg|png|gif|webp>>
 ```
+
+>[!NOTE]
+> You can omit the `<source-directory>` part if you have set a default source directory in the configuration file.
 
 for example:
 
