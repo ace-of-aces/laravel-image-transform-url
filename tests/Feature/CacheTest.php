@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Cache::flush();
@@ -11,7 +13,7 @@ beforeEach(function () {
 
 it('can serve from the cache after identical requests', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'width=500',
         'path' => 'cat.jpg',
     ]));
@@ -19,7 +21,7 @@ it('can serve from the cache after identical requests', function () {
     $response->assertOk();
     $response->assertHeader('X-Cache', 'MISS');
 
-    $secondResponse = $this->get(route('image.transform', [
+    $secondResponse = $this->get(route('image.transform.default', [
         'options' => 'width=500',
         'path' => 'cat.jpg',
     ]));
@@ -30,7 +32,7 @@ it('can serve from the cache after identical requests', function () {
 
 it('can use the version option to revalidate the cache', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'version=1',
         'path' => 'cat.jpg',
     ]));
@@ -38,7 +40,7 @@ it('can use the version option to revalidate the cache', function () {
     $response->assertOk();
     $response->assertHeader('X-Cache', 'MISS');
 
-    $sameVersionResponse = $this->get(route('image.transform', [
+    $sameVersionResponse = $this->get(route('image.transform.default', [
         'options' => 'version=1',
         'path' => 'cat.jpg',
     ]));
@@ -46,7 +48,7 @@ it('can use the version option to revalidate the cache', function () {
     $sameVersionResponse->assertOk();
     $sameVersionResponse->assertHeader('X-Cache', 'HIT');
 
-    $differentVersionResponse = $this->get(route('image.transform', [
+    $differentVersionResponse = $this->get(route('image.transform.default', [
         'options' => 'version=2',
         'path' => 'cat.jpg',
     ]));

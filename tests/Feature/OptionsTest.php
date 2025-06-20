@@ -13,7 +13,7 @@ beforeEach(function () {
 
 it('can process the height option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
     ]));
@@ -26,7 +26,7 @@ it('can process the height option', function () {
 
 it('can process the width option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'height=100',
         'path' => 'cat.jpg',
     ]));
@@ -39,7 +39,7 @@ it('can process the width option', function () {
 
 it('can process the format option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'format=webp',
         'path' => 'cat.jpg',
     ]));
@@ -51,7 +51,7 @@ it('can process the format option', function () {
 
 it('can process the quality option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'quality=50',
         'path' => 'cat.jpg',
     ]));
@@ -63,7 +63,7 @@ it('can process the quality option', function () {
 
 it('can process the blur option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'blur=20',
         'path' => 'cat.jpg',
     ]));
@@ -74,7 +74,7 @@ it('can process the blur option', function () {
 });
 
 it('can process the flip option', function () {
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'flip=hv',
         'path' => 'cat.jpg',
     ]));
@@ -86,7 +86,7 @@ it('can process the flip option', function () {
 
 it('can process the contrast option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'contrast=-50',
         'path' => 'cat.jpg',
     ]));
@@ -98,7 +98,7 @@ it('can process the contrast option', function () {
 
 it('can process the background option', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'background=ffaa00',
         'path' => 'octocat.png',
     ]));
@@ -110,7 +110,7 @@ it('can process the background option', function () {
 
 it('can process multiple options at once', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'width=100,format=gif,quality=50',
         'path' => 'cat.jpg',
     ]));
@@ -123,7 +123,7 @@ it('can process multiple options at once', function () {
 
 it('can handle a trailing comma in options', function () {
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'width=100,',
         'path' => 'cat.jpg',
     ]));

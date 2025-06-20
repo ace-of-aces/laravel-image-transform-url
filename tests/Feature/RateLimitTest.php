@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Cache::flush();
@@ -20,7 +22,7 @@ it('can apply rate limiting to image transformation requests with distinct optio
     config()->set('image-transform-url.rate_limit.decay_seconds', 60);
 
     /** @var TestCase $this */
-    $firstResponse = $this->get(route('image.transform', [
+    $firstResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
     ]));
@@ -30,7 +32,7 @@ it('can apply rate limiting to image transformation requests with distinct optio
         'mime' => 'image/jpeg',
     ]);
 
-    $secondResponse = $this->get(route('image.transform', [
+    $secondResponse = $this->get(route('image.transform.default', [
         'options' => 'width=200',
         'path' => 'cat.jpg',
     ]));
@@ -40,7 +42,7 @@ it('can apply rate limiting to image transformation requests with distinct optio
         'mime' => 'image/jpeg',
     ]);
 
-    $thirdResponse = $this->get(route('image.transform', [
+    $thirdResponse = $this->get(route('image.transform.default', [
         'options' => 'width=300',
         'path' => 'cat.jpg',
     ]));
@@ -55,7 +57,7 @@ it('does not apply rate limiting to image transformations with identical options
     config()->set('image-transform-url.rate_limit.decay_seconds', 60);
 
     /** @var TestCase $this */
-    $firstResponse = $this->get(route('image.transform', [
+    $firstResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
     ]));
@@ -65,7 +67,7 @@ it('does not apply rate limiting to image transformations with identical options
         'mime' => 'image/jpeg',
     ]);
 
-    $secondResponse = $this->get(route('image.transform', [
+    $secondResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
     ]));
@@ -75,7 +77,7 @@ it('does not apply rate limiting to image transformations with identical options
         'mime' => 'image/jpeg',
     ]);
 
-    $thirdResponse = $this->get(route('image.transform', [
+    $thirdResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
     ]));

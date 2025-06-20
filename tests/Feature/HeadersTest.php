@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     Cache::flush();
@@ -18,7 +20,7 @@ it('responds with the configured headers', function () {
     ]);
 
     /** @var TestCase $this */
-    $response = $this->get(route('image.transform', [
+    $response = $this->get(route('image.transform.default', [
         'options' => 'width=500',
         'path' => 'cat.jpg',
     ]));
