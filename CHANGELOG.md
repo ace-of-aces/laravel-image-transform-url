@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v0.5.0 - 2025-06-20
+
+This version introduces breaking changes in how the image source configuration works.
+This allows for multiple source directories to be defined, as well as fixing storage support.
+
+### What's Changed
+
+* BREAKING: Introduced new `source_directories` and `default_source_directory` configuration options that replace the `public_path` option. Please adjust the `image-transform-url.php` configuration accordingly, or re-publish the vendor config file.
+* fixes: https://github.com/ace-of-aces/laravel-image-transform-url/issues/3
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot in https://github.com/ace-of-aces/laravel-image-transform-url/pull/2
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v0.4.0...v0.5.0
+
 ## v0.4.0 - 2025-05-30
 
 This version adds a new `background` option which can be used to set a HEX color to transparent areas of png images.
