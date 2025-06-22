@@ -52,12 +52,17 @@
             "@composer run prepare"
         ],
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint",
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "test:types": "vendor/bin/phpstan analyse",
+        "test:suite": "vendor/bin/pest --parallel",
+        "test:style": "vendor/bin/pint --test",
+        "test": [
+            "@test:suite",
+            "@test:types",
+            "@test:style"
+        ],
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",
