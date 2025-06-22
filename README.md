@@ -144,6 +144,10 @@ will be processed as:
 http://localhost:8000/image-transform/width=250,format=webp/example.jpg
 ```
 
+## Roadmap
+
+Please see [ROADMAP](ROADMAP.md) for details on planned features and improvements.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
