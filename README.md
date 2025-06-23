@@ -132,7 +132,7 @@ The route handler of this package is designed to be robust against invalid optio
 
 This is why the route handler will return a `404` response if:
 
--   a requested image does not existn at the specified path
+-   a requested image does not exist at the specified path
 -   the requested image is not a valid image file
 -   the provided options are not in the correct format (`key=value`, no trailing comma, etc.)
 
