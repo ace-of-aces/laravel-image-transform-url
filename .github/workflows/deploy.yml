@@ -25,6 +25,9 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,12 +41,13 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+          cache-dependency-path: './docs/pnpm-lock.yaml'
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: pnpm ci # or pnpm install / yarn install / bun install
+        run: pnpm ci
       - name: Build with VitePress
-        run: pnpm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        run: pnpm run docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
