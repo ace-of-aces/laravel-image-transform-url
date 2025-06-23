@@ -4,6 +4,7 @@ namespace AceOfAces\LaravelImageTransformUrl;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Workbench\App\View\Components\AdaptiveImage;
 
 class LaravelImageTransformUrlServiceProvider extends PackageServiceProvider
 {
@@ -17,6 +18,7 @@ class LaravelImageTransformUrlServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-image-transform-url')
             ->hasConfigFile()
-            ->hasRoute('image');
+            ->hasRoute('image')
+            ->hasViewComponent('adaptive-image', AdaptiveImage::class);
     }
 }

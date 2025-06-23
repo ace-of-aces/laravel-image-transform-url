@@ -17,9 +17,10 @@ workbench:
     web: true
     api: true
     commands: true
-    components: false
+    components: true
     factories: true
-    views: false
+    views: true
+    config: true
   build:
     - asset-publish
     - create-sqlite-db
