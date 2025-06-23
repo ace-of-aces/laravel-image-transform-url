@@ -6,6 +6,7 @@ export default defineConfig({
     title: "Laravel Image Transform URL",
     description: "Easy, URL-based image transformations for Laravel inspired by Cloudflare Images.",
     srcDir: './pages',
+    cleanUrls: true,
     markdown: {
         theme: {
             light: 'github-light',
