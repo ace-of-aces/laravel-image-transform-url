@@ -6,18 +6,17 @@ The most important configuration is the [`Cache-Control`](https://developer.mozi
 
 ```php
 /*
-    |--------------------------------------------------------------------------
-    | Response Headers
-    |--------------------------------------------------------------------------
-    |
-    | Below you may configure the response headers which are added to the
-    | response. This is especially useful for controlling caching behavior
-    | of CDNs.
-    |
-    */
-
-    'headers' => [
-        'Cache-Control' => env('IMAGE_TRANSFORM_HEADER_CACHE_CONTROL', 'immutable, public, max-age=2592000, s-maxage=2592000'),
-        // more headers can be added here
-    ],
+|--------------------------------------------------------------------------
+| Response Headers
+|--------------------------------------------------------------------------
+|
+| Below you may configure the response headers which are added to the
+| response. This is especially useful for controlling caching behavior
+| of CDNs.
+|
+*/
+'headers' => [
+    'Cache-Control' => env('IMAGE_TRANSFORM_HEADER_CACHE_CONTROL', 'immutable, public, max-age=2592000, s-maxage=2592000'),
+    // more headers can be added here
+],
 ```
