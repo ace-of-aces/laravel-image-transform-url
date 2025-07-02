@@ -61,7 +61,7 @@ it('can disable the cache', function () {
     /** @var TestCase $this */
     config()->set('image-transform-url.cache.enabled', false);
 
-    for($i = 0; $i < 2; $i++) {
+    for ($i = 0; $i < 2; $i++) {
         $response = $this->get(route('image.transform.default', [
             'options' => 'width=500',
             'path' => 'cat.jpg',
