@@ -17,7 +17,9 @@ Please review these guidelines before submitting any pull requests.
 * You may need to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to avoid merge conflicts.
 * Please remember that we follow [SemVer](http://semver.org/).
 
-## Setup
+## 1. Package Development
+
+### Setup
 
 Clone your fork, then install the dev dependencies:
 ```bash
@@ -30,23 +32,35 @@ Build workbench:
 composer build
 ```
 
-## Playground
+### Playground
 
 You can visit a test application via [Workbench](https://github.com/orchestral/workbench):
 ```bash
 composer serve
 ```
 
-## Lint
+### Lint
 
 Lint your code:
 ```bash
 composer lint
 ```
-## Tests
+### Tests
 
 Run all tests:
 ```bash
 composer test
 ```
 
+## 2. Documentation
+
+The documentation is built using [Vitepress](https://vitepress.dev/).
+
+We use [pnpm](https://pnpm.io/) for package management.
+
+To run the site locally, run:
+```bash
+cd docs
+pnpm i
+pnpm dev
+```
