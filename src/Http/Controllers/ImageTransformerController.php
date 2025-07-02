@@ -6,6 +6,7 @@ namespace AceOfAces\LaravelImageTransformUrl\Http\Controllers;
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
+use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
 use Intervention\Image\Encoders\AutoEncoder;
@@ -25,7 +25,7 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class ImageTransformerController extends \Illuminate\Routing\Controller
 {
-    use ResolvesOptions;
+    use ManagesImageCache, ResolvesOptions;
 
     public function transformWithPrefix(Request $request, string $pathPrefix, string $options, string $path)
     {
@@ -127,19 +127,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         if (config()->boolean('image-transform-url.cache.enabled')) {
             defer(function () use ($pathPrefix, $path, $options, $encoded) {
-
-                $cachePath = $this->getCachePath($pathPrefix, $path, $options);
-
-                $cacheDir = dirname($cachePath);
-
-                File::ensureDirectoryExists($cacheDir);
-                File::put($cachePath, $encoded->toString());
-
-                Cache::put(
-                    key: 'image-transform-url:'.$cachePath,
-                    value: true,
-                    ttl: config()->integer('image-transform-url.cache.lifetime'),
-                );
+                $this->storeCachedImage($pathPrefix, $path, $options, $encoded);
             });
         }
 
@@ -233,16 +221,6 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             })->filter(function ($value, $key) {
                 return in_array($key, config()->array('image-transform-url.enabled_options'), true);
             })->toArray();
-    }
-
-    /**
-     * Get the cache path for the given path and options.
-     */
-    protected static function getCachePath(string $pathPrefix, string $path, array $options): string
-    {
-        $optionsHash = md5(json_encode($options));
-
-        return Storage::disk(config()->string('image-transform-url.cache.disk'))->path('_cache/image-transform-url/'.$pathPrefix.'/'.$optionsHash.'_'.$path);
     }
 
     /**
