@@ -1,0 +1,51 @@
+name: "Bump Docs Version"
+
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract version from release tag
+        id: extract_version
+        run: |
+          VERSION="${{ github.event.release.tag_name }}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: "./docs/pnpm-lock.yaml"
+
+      - name: Update package.json version
+        run: |
+          cd docs
+          pnpm version ${{ steps.extract_version.outputs.version }} --no-git-tag-version
+          echo "Updated docs/package.json to version ${{ steps.extract_version.outputs.version }}"
+
+      - name: Commit updated package.json
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          branch: main
+          commit_message: "chore(docs): bump version to ${{ steps.extract_version.outputs.version }}"
+          file_pattern: "docs/package.json"
