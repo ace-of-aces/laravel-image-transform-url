@@ -4,6 +4,7 @@ namespace AceOfAces\LaravelImageTransformUrl\Tests;
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\LaravelImageTransformUrlServiceProvider;
+use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\ServiceProvider as InterventionImageServiceProvider;
@@ -12,7 +13,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
-    use WithWorkbench;
+    use ManagesImageCache, WithWorkbench;
 
     protected $loadEnvironmentVariables = false;
 

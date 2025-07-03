@@ -4,24 +4,24 @@ This package supports a variety of options, but you may not need or want to use 
 
 ```php
 /*
-    |--------------------------------------------------------------------------
-    | Enabled Options
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the options which are enabled for the image
-    | transformer.
-    |
-    */
+|--------------------------------------------------------------------------
+| Enabled Options
+|--------------------------------------------------------------------------
+|
+| Here you may configure the options which are enabled for the image
+| transformer.
+|
+*/
 
-    'enabled_options' => env('IMAGE_TRANSFORM_ENABLED_OPTIONS', [
-        'width',
-        'height',
-        'format',
-        'quality',
-        // 'flip',
-        // 'contrast',
-        // 'version',
-        // 'background',
-        // 'blur'
-    ]),
+'enabled_options' => env('IMAGE_TRANSFORM_ENABLED_OPTIONS', [
+    'width',
+    'height',
+    'format',
+    'quality',
+    // 'flip',
+    // 'contrast',
+    // 'version',
+    // 'background',
+    // 'blur'
+]),
 ```

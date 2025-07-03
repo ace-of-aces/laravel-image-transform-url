@@ -82,6 +82,8 @@ return [
         'enabled' => env('IMAGE_TRANSFORM_CACHE_ENABLED', true),
         'lifetime' => env('IMAGE_TRANSFORM_CACHE_LIFETIME', 60 * 24 * 7), // 7 days
         'disk' => env('IMAGE_TRANSFORM_CACHE_DISK', 'local'),
+        'max_size_mb' => env('IMAGE_TRANSFORM_CACHE_MAX_SIZE_MB', 100), // 100 MB
+        'clear_to_percent' => env('IMAGE_TRANSFORM_CACHE_CLEAR_TO_PERCENT', 80), // 80% of max size
     ],
 
     /*
