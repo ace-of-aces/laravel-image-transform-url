@@ -1,0 +1,31 @@
+name: Question
+description: Ask a question about the Package
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in the package! Please provide the following details to help us understand your question better.
+  - type: textarea
+    id: question
+    attributes:
+      label: What is your question?
+      description: Please describe your question in detail. What are you trying to achieve?
+      placeholder: I'm trying to do X but I'm not sure how to approach it with this package.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Please provide any relevant context, code snippets, or configuration that might help us understand your situation better.
+      placeholder: I have tried X approach but I'm getting Y result instead of Z.
+    validations:
+      required: false
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Use this field to provide any other information that you feel might be relevant to your question.
+    validations:
+      required: false

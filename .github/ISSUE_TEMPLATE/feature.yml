@@ -1,0 +1,40 @@
+name: Feature Request
+description: Request a new feature for the Package
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature! Please provide the following details to help us understand your request.
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Please describe the feature you would like to see added. What problem would it solve?
+      placeholder: I would like to be able to X because it would help with Y use case.
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Please describe the specific use case or scenario where this feature would be beneficial.
+      placeholder: When working with X type of images, I need to Y but currently can only Z.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: If you have ideas on how this feature could be implemented, please share them here.
+      placeholder: This could be implemented by adding a new option that allows...
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Use this field to provide any other information that you feel might be relevant to your feature request.
+    validations:
+      required: false
