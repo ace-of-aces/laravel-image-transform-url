@@ -3,6 +3,7 @@ name: "Bump Docs Version"
 on:
   release:
     types: [released]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -42,6 +43,12 @@ jobs:
           cd docs
           pnpm version ${{ steps.extract_version.outputs.version }} --no-git-tag-version
           echo "Updated docs/package.json to version ${{ steps.extract_version.outputs.version }}"
+
+      - name: Pull latest changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull origin main --rebase
 
       - name: Commit updated package.json
         uses: stefanzweifel/git-auto-commit-action@v6
