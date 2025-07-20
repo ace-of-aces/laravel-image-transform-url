@@ -95,14 +95,15 @@ return [
     | new transformation by the path and IP address. It is recommended to
     | set this to a low value, e.g. 2 requests per minute, to prevent
     | abuse.
+    |
     */
 
     'rate_limit' => [
         'enabled' => env('IMAGE_TRANSFORM_RATE_LIMIT_ENABLED', true),
-        'disabled_for_environments' => [
+        'disabled_for_environments' => env('IMAGE_TRANSFORM_RATE_LIMIT_DISABLED_FOR_ENVIRONMENTS', [
             'local',
             'testing',
-        ],
+        ]),
         'max_attempts' => env('IMAGE_TRANSFORM_RATE_LIMIT_MAX_REQUESTS', 2),
         'decay_seconds' => env('IMAGE_TRANSFORM_RATE_LIMIT_DECAY_SECONDS', 60),
     ],
