@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v0.7.0 - 2025-07-20
+
+In this version, the planned URL signing feature has been added.
+
+**⚠️ Potential breaking change:**
+Renamed the service provider from `LaravelImageTransformUrlServiceProvider` to `ImageTransformUrlServiceProvider`.
+Code changes should only necessary when a custom service provider registration is being used.
+
+### What's Changed
+
+* [Feature]: Signed URLs by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/11
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v0.6.0...v0.7.0
+
 ## v0.6.0 - 2025-07-03
 
 This version introduces a new cache size limit, enabled by default. More info in the [documentation](https://image-transform-url.julian.center/image-caching#cache-size-limit).
