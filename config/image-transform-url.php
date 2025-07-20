@@ -110,6 +110,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Signed URLs
+    |--------------------------------------------------------------------------
+    |
+    | Below you may configure signed URLs, which can be used to protect image
+    | transformations from unauthorized access. Signature verification is
+    | only applied to images from the for_source_directories array.
+    |
+    */
+
+    'signed_urls' => [
+        'enabled' => env('IMAGE_TRANSFORM_SIGNED_URLS_ENABLED', false),
+        'for_source_directories' => env('IMAGE_TRANSFORM_SIGNED_URLS_FOR_SOURCE_DIRECTORIES', [
+            //
+        ]),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Response Headers
     |--------------------------------------------------------------------------
     |

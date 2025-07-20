@@ -3,7 +3,7 @@
 namespace AceOfAces\LaravelImageTransformUrl\Tests;
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
-use AceOfAces\LaravelImageTransformUrl\LaravelImageTransformUrlServiceProvider;
+use AceOfAces\LaravelImageTransformUrl\ImageTransformUrlServiceProvider;
 use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            LaravelImageTransformUrlServiceProvider::class,
+            ImageTransformUrlServiceProvider::class,
         ];
     }
 

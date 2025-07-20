@@ -83,7 +83,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AceOfAces\\LaravelImageTransformUrl\\LaravelImageTransformUrlServiceProvider"
+                "AceOfAces\\LaravelImageTransformUrl\\ImageTransformUrlServiceProvider"
             ]
         }
     },
