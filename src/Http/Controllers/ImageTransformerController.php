@@ -27,36 +27,42 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 {
     use ManagesImageCache, ResolvesOptions;
 
-    public function transformWithPrefix(Request $request, string $pathPrefix, string $options, string $path)
+    /**
+     * Transform an image with a specified path prefix and custom options.
+     */
+    public function transformWithPrefix(Request $request, string $pathPrefix, string $options, string $path): Response
     {
         return $this->handleTransform($request, $pathPrefix, $options, $path);
     }
 
-    public function transformDefault(Request $request, string $options, string $path)
+    /**
+     * Transform an image with the default path prefix and custom options.
+     */
+    public function transformDefault(Request $request, string $options, string $path): Response
     {
         return $this->handleTransform($request, null, $options, $path);
     }
 
-    protected function handleTransform(Request $request, ?string $pathPrefix, string $options, ?string $path = null)
+    /**
+     * Handle the image transformation logic.
+     */
+    protected function handleTransform(Request $request, ?string $pathPrefix, string $options, ?string $path = null): Response
     {
         $realPath = $this->handlePath($pathPrefix, $path);
 
         $options = $this->parseOptions($options);
 
-        // Check cache
         if (config()->boolean('image-transform-url.cache.enabled')) {
             $cachePath = $this->getCachePath($pathPrefix, $path, $options);
 
             if (File::exists($cachePath)) {
                 if (Cache::has('image-transform-url:'.$cachePath)) {
-                    // serve file from storage
                     return $this->imageResponse(
                         imageContent: File::get($cachePath),
                         mimeType: File::mimeType($cachePath),
                         cacheHit: true
                     );
                 } else {
-                    // Cache expired, delete the cache file and continue
                     File::delete($cachePath);
                 }
             }
@@ -64,7 +70,8 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         if (
             config()->boolean('image-transform-url.rate_limit.enabled') &&
-            ! in_array(App::environment(), config()->array('image-transform-url.rate_limit.disabled_for_environments'))) {
+            ! in_array(App::environment(), config()->array('image-transform-url.rate_limit.disabled_for_environments'))
+        ) {
             $this->rateLimit($request, $path);
         }
 
@@ -109,7 +116,6 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         }
 
-        // We use the mime type instead of the extension to determine the format, because this is more reliable.
         $originalMimetype = File::mimeType($realPath);
 
         $format = $this->getStringOptionValue($options, 'format', $originalMimetype);
@@ -141,19 +147,20 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
     /**
      * Handle the path and ensure it is valid.
+     *
+     * @param-out string $pathPrefix
      */
     protected function handlePath(?string &$pathPrefix, ?string &$path): string
     {
         if ($path === null) {
             $path = $pathPrefix;
-            $pathPrefix = null;
         }
 
-        $allowedSourceDirectories = config('image-transform-url.source_directories', []);
-
-        if (! $pathPrefix) {
-            $pathPrefix = config('image-transform-url.default_source_directory') ?? array_key_first($allowedSourceDirectories);
+        if (is_null($pathPrefix)) {
+            $pathPrefix = config()->string('image-transform-url.default_source_directory', (string) array_key_first(config()->array('image-transform-url.source_directories')));
         }
+
+        $allowedSourceDirectories = config()->array('image-transform-url.source_directories', []);
 
         abort_unless(array_key_exists($pathPrefix, $allowedSourceDirectories), 404);
 
