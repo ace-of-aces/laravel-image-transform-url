@@ -10,8 +10,8 @@ The basics are done, but a deeper integration with Laravel's features and ecosys
 - [x] Out-of-the-box support for usage with CDNs
 - [x] Support for different image formats (JPEG, PNG, GIF, WebP)
 - [x] Support for multiple source directories
+- [x] Support for signed image URLs
 - [ ] Blade image component for prop-based image transformation options (+ Vue & React snippets)
 - [ ] Blade image component with automatic srcset generation (+ Vue & React snippets)
-- [ ] Support for signed image URLs
 - [ ] Support for S3
 - [ ] Enhanced documenation with real-world examples
