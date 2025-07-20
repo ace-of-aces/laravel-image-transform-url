@@ -95,16 +95,35 @@ return [
     | new transformation by the path and IP address. It is recommended to
     | set this to a low value, e.g. 2 requests per minute, to prevent
     | abuse.
+    |
     */
 
     'rate_limit' => [
         'enabled' => env('IMAGE_TRANSFORM_RATE_LIMIT_ENABLED', true),
-        'disabled_for_environments' => [
+        'disabled_for_environments' => env('IMAGE_TRANSFORM_RATE_LIMIT_DISABLED_FOR_ENVIRONMENTS', [
             'local',
             'testing',
-        ],
+        ]),
         'max_attempts' => env('IMAGE_TRANSFORM_RATE_LIMIT_MAX_REQUESTS', 2),
         'decay_seconds' => env('IMAGE_TRANSFORM_RATE_LIMIT_DECAY_SECONDS', 60),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Signed URLs
+    |--------------------------------------------------------------------------
+    |
+    | Below you may configure signed URLs, which can be used to protect image
+    | transformations from unauthorized access. Signature verification is
+    | only applied to images from the for_source_directories array.
+    |
+    */
+
+    'signed_urls' => [
+        'enabled' => env('IMAGE_TRANSFORM_SIGNED_URLS_ENABLED', false),
+        'for_source_directories' => env('IMAGE_TRANSFORM_SIGNED_URLS_FOR_SOURCE_DIRECTORIES', [
+            //
+        ]),
     ],
 
     /*
