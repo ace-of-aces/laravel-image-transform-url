@@ -16,19 +16,31 @@ Easy, URL-based image transformations inspired by [Cloudflare Images](https://de
 
 ## Documentation
 
-Check out the [official documentation website](https://image-transform-url.julian.center).
+All information on how to use this package can be found in our official documentation website.
 
-## Roadmap
-
-Please see [ROADMAP](ROADMAP.md) for details on planned features and improvements.
+[→ Read the Docs](https://image-transform-url.julian.center)
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Notable changes to this package are documented in our changelog for every new release.
+
+[→ See what's changed](CHANGELOG.md)
+
+## Roadmap
+
+The package is under active development, and we have some things planned for the future.
+
+[→ View the Roadmap](ROADMAP.md)
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Whether it's reporting or fixing bugs, contributing new features, or enhancing the documentation, your help is always appreciated. 🙏🏻
+
+[→ Read our Contribution Guidelines](CONTRIBUTING.md)
+
+[→ Open an Issue](https://github.com/ace-of-aces/laravel-image-transform-url/issues)
+
+[→ Submit a Pull Request](https://github.com/ace-of-aces/laravel-image-transform-url/pulls)
 
 ## Credits
 
@@ -38,4 +50,4 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Made with ❤️ under the [MIT License](LICENSE.md).
