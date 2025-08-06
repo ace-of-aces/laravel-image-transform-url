@@ -12,10 +12,42 @@ use Illuminate\Support\Facades\URL;
 class ImageTransformUrl
 {
     /**
+     * Generate a regular URL for the image transformation.
+     *
+     * @param  string  $path  The path to the image.
+     * @param  array|string  $options  The transformation options.
+     * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
+     * @return string The generated URL.
+     */
+    public function make(string $path, array|string $options = [], ?string $pathPrefix = null): string
+    {
+        $options = $this->optionsToString($options);
+
+        if (empty($pathPrefix)) {
+            return URL::route('image.transform.default', ['options' => $options, 'path' => $path]);
+        }
+
+        return URL::route('image.transform', ['pathPrefix' => $pathPrefix, 'options' => $options, 'path' => $path]);
+    }
+
+    /**
+     * Generate a regular URL for the image transformation.
+     *
+     * @param  string  $path  The path to the image.
+     * @param  array|string  $options  The transformation options.
+     * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
+     * @return string The generated URL.
+     */
+    public function url(string $path, array|string $options = [], ?string $pathPrefix = null): string
+    {
+        return $this->make($path, $options, $pathPrefix);
+    }
+
+    /**
      * Generate a signed URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
-     * @param  array  $options  The transformation options.
+     * @param  array|string  $options  The transformation options.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
      * @param  DateTimeInterface|\DateInterval|int|null  $expiration  The expiration time for the signed URL.
      * @return string The signed URL.
@@ -28,11 +60,7 @@ class ImageTransformUrl
             throw new InvalidConfigurationException('Signed URLs are not enabled. Please check your configuration.');
         }
 
-        if (is_array($options)) {
-            $options = collect($options)
-                ->map(fn ($value, $key) => "$key=$value")
-                ->implode(',');
-        }
+        $options = $this->optionsToString($options);
 
         if (empty($pathPrefix)) {
             return URL::signedRoute(
@@ -52,7 +80,7 @@ class ImageTransformUrl
     }
 
     /**
-     * Create a temporary signed URL for the image transformation.
+     * Generate a temporary signed URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
      * @param  array|string  $options  The transformation options.
@@ -66,5 +94,19 @@ class ImageTransformUrl
     public function temporarySignedUrl(string $path, array|string $options, DateTimeInterface|DateInterval|int $expiration, ?string $pathPrefix, ?bool $absolute = true): string
     {
         return $this->signedUrl($path, $options, $pathPrefix, $expiration, $absolute);
+    }
+
+    /**
+     * Convert array options to a string format suitable for URL generation.
+     */
+    protected function optionsToString(array|string $options): string
+    {
+        if (is_array($options)) {
+            return collect($options)
+                ->map(fn ($value, $key) => "$key=$value")
+                ->implode(',');
+        }
+
+        return $options;
     }
 }
