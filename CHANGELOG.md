@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v0.8.0 - 2025-08-06
+
+### What's Changed
+
+* [Feat]: Added support for programatically generating unsigned URLs in https://github.com/ace-of-aces/laravel-image-transform-url/commit/33d88768cff092b224301d6c0c72e2502941b43d
+* chore(deps): bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/12
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v0.7.1...v0.8.0
+
 ## v0.7.0 - 2025-07-20
 
 In this version, the planned URL signing feature has been added.
