@@ -22,3 +22,43 @@ With a `source-directory`, respectively:
 ```ansi
 http://[96mlocalhost:8000[39m/[31mimage-transform[39m/[95mimages[39m/[94mwidth=250,quality=80,format=webp[39m/[93mfoo/bar/example.jpg
 ```
+
+## Programmatic URL Generation
+
+While you can construct URLs manually when you need it, the package provides convenient methods to generate transformation URLs programmatically using the `ImageTransformUrl` facade.
+
+Use the `make()` method to generate regular transformation URLs:
+
+```php
+use AceOfAces\LaravelImageTransformUrl\Facades\ImageTransformUrl;
+
+// Generate a URL with array options
+$url = ImageTransformUrl::make(
+    'foo/example.jpg',
+    ['width' => 250, 'quality' => 80, 'format' => 'webp'],
+    'images'
+);
+
+// Generate a URL with string options
+$url = ImageTransformUrl::make(
+    'foo/example.jpg',
+    'width=250,quality=80,format=webp',
+    'images'
+);
+
+// Use default source directory (omit the third parameter)
+$url = ImageTransformUrl::make(
+    'foo/example.jpg',
+    ['width' => 250, 'quality' => 80]
+);
+```
+
+The `url()` method is also available as an alias for `make()`:
+
+```php
+$url = ImageTransformUrl::url('img/example.jpg', ['width' => 250]);
+```
+
+::: info
+The facade also provides methods for [generating signed URLs](/signed-urls#generating-signed-urls).
+:::
