@@ -8,6 +8,8 @@ use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
+use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageSource;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
 use Intervention\Image\Encoders\AutoEncoder;
@@ -48,7 +51,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
      */
     protected function handleTransform(Request $request, ?string $pathPrefix, string $options, ?string $path = null): Response
     {
-        $realPath = $this->handlePath($pathPrefix, $path);
+        $source = $this->handlePath($pathPrefix, $path);
 
         $options = $this->parseOptions($options);
 
@@ -75,7 +78,10 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             $this->rateLimit($request, $path);
         }
 
-        $image = Image::read($realPath);
+        $image = match ($source->type) {
+            'disk' => Image::read(Storage::disk($source->disk)->get($source->path)),
+            default => Image::read($source->path),
+        };
 
         if (Arr::hasAny($options, ['width', 'height'])) {
             $image->scale(
@@ -116,7 +122,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         }
 
-        $originalMimetype = File::mimeType($realPath);
+        $originalMimetype = $source->mime;
 
         $format = $this->getStringOptionValue($options, 'format', $originalMimetype);
         $quality = $this->getPositiveIntOptionValue($options, 'quality', 100, 100);
@@ -150,7 +156,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
      *
      * @param-out string $pathPrefix
      */
-    protected function handlePath(?string &$pathPrefix, ?string &$path): string
+    protected function handlePath(?string &$pathPrefix, ?string &$path): ImageSource
     {
         if ($path === null) {
             $path = $pathPrefix;
@@ -164,8 +170,38 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         abort_unless(array_key_exists($pathPrefix, $allowedSourceDirectories), 404);
 
-        $basePath = $allowedSourceDirectories[$pathPrefix];
-        $requestedPath = $basePath.'/'.$path;
+        $base = $allowedSourceDirectories[$pathPrefix];
+
+        // Handle disk-based source directories
+        if (is_array($base) && array_key_exists('disk', $base)) {
+
+            $disk = (string) $base['disk'];
+            $prefix = isset($base['prefix']) ? trim((string) $base['prefix'], '/') : '';
+
+            $normalized = $this->normalizeRelativePath($path);
+            abort_unless(! is_null($normalized), 404);
+
+            $diskPath = trim($prefix !== '' ? $prefix.'/'.$normalized : $normalized, '/');
+
+            abort_unless(Storage::disk($disk)->exists($diskPath), 404);
+
+            /** @var FilesystemAdapter $diskAdapter */
+            $diskAdapter = Storage::disk($disk);
+            $mime = $diskAdapter->mimeType($diskPath);
+
+            abort_unless(in_array($mime, AllowedMimeTypes::all(), true), 404);
+
+            return new ImageSource(
+                type: 'disk',
+                path: $diskPath,
+                mime: $mime,
+                disk: $disk,
+            );
+        }
+
+        // Handle local filesystem paths
+        $basePath = (string) $base;
+        $requestedPath = rtrim($basePath, '/').'/'.$path;
         $realPath = realpath($requestedPath);
 
         abort_unless($realPath, 404);
@@ -177,7 +213,39 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
         abort_unless(in_array(File::mimeType($realPath), AllowedMimeTypes::all(), true), 404);
 
-        return $realPath;
+        return new ImageSource(
+            type: 'local',
+            path: $realPath,
+            mime: (string) File::mimeType($realPath),
+        );
+    }
+
+    /**
+     * Normalize a relative path by resolving `.` and `..` segments.
+     * Returns null if the path escapes above the root.
+     */
+    protected function normalizeRelativePath(string $path): ?string
+    {
+        $path = str_replace('\\', '/', $path);
+        $segments = array_filter(explode('/', $path), fn ($s) => $s !== '');
+        $stack = [];
+
+        foreach ($segments as $segment) {
+            if ($segment === '.') {
+                continue;
+            }
+            if ($segment === '..') {
+                if (empty($stack)) {
+                    return null;
+                }
+                array_pop($stack);
+
+                continue;
+            }
+            $stack[] = $segment;
+        }
+
+        return implode('/', $stack);
     }
 
     /**

@@ -13,6 +13,9 @@ return [
     | Important: The public storage directory should be addressed directly via
     | storage('app/public') instead of the public_path('storage') link.
     |
+    | You can also use any Laravel Filesystem disk (e.g. S3) by providing an
+    | array configuration with 'disk' and an optional 'prefix'.
+    |
     */
 
     'source_directories' => [
