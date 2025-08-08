@@ -7,7 +7,7 @@
 -   [GD PHP Library](https://www.php.net/manual/en/book.image.php)
 
 ::: tip
-If you want to use the file caching feature (highly recommended), a configured `Storage` disk and a `Cache` driver is required. More info in the [Image Caching](#image-caching) section.
+If you want to use the file caching feature (highly recommended), a configured `Storage` disk and a `Cache` driver is required. More info in the [Image Caching](/image-caching) section.
 :::
 
 ### Important `php.ini` settings❗
