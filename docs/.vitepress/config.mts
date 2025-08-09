@@ -54,6 +54,7 @@ export default defineConfig({
                     { text: 'Signed URLs', link: '/signed-urls' },
                     { text: 'Image Caching', link: '/image-caching' },
                     { text: 'Rate Limiting', link: '/rate-limiting' },
+                    { text: 'S3 Usage', link: '/s3-usage' },
                     { text: 'CDN Usage', link: '/cdn-usage' },
                     { text: 'Error Handling', link: '/error-handling' },
                 ]

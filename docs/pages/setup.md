@@ -22,6 +22,9 @@ An example source directory configuration might look like this:
 | Important: The public storage directory should be addressed directly via
 | storage('app/public') instead of the public_path('storage') link.
 |
+| You can also use any Laravel Filesystem disk (e.g. S3) by providing an
+| array configuration with 'disk' and an optional 'prefix'.
+|
 */
 'source_directories' => [
     'images' => public_path('images'),
@@ -40,3 +43,18 @@ An example source directory configuration might look like this:
 'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images'),
 // ...
 ```
+
+## Configuring Remote Sources
+If you want to use a remote source (like AWS S3 or Cloudflare R2) as a source directory, you can configure any [Laravel Filesystem disk](https://laravel.com/docs/filesystem#configuration) in your `config/filesystems.php` file and then reference it in the `source_directories` configuration.
+
+```php
+'source_directories' => [
+    // Other source directories...
+    'remote' => [
+        'disk' => 's3', // Any valid Laravel Filesystem disk
+        'prefix' => 'images', // Optional, if you want to specify a subdirectory
+    ],
+],
+```
+
+Read the [full guide on how to use this package with S3](/s3-usage.md).
