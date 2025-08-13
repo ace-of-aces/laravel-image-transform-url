@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v0.9.0 - 2025-08-13
+
+### What's Changed
+
+* [Feat]: S3 Support by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/13
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v0.8.0...v0.9.0
+
 ## v0.8.0 - 2025-08-06
 
 ### What's Changed
