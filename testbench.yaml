@@ -20,6 +20,7 @@ workbench:
     components: false
     factories: true
     views: false
+    config: true
   build:
     - asset-publish
     - create-sqlite-db

@@ -13,14 +13,15 @@ return [
     | Important: The public storage directory should be addressed directly via
     | storage('app/public') instead of the public_path('storage') link.
     |
-    | You can also use any Laravel Filesystem disk (e.g. S3) by providing an
+    | You can also use any Laravel Filesystem disk (e.g. s3) by providing an
     | array configuration with 'disk' and an optional 'prefix'.
     |
     */
 
     'source_directories' => [
-        'images' => public_path('images'),
+        'images-test' => public_path('images'),
         'storage' => storage_path('app/public/images'),
+        'remote' => ['disk' => 'r2'],
     ],
 
     /*
@@ -34,7 +35,7 @@ return [
     |
     */
 
-    'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images'),
+    'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images-test'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +85,7 @@ return [
     'cache' => [
         'enabled' => env('IMAGE_TRANSFORM_CACHE_ENABLED', true),
         'lifetime' => env('IMAGE_TRANSFORM_CACHE_LIFETIME', 60 * 24 * 7), // 7 days
-        'disk' => env('IMAGE_TRANSFORM_CACHE_DISK', 'local'),
+        'disk' => env('IMAGE_TRANSFORM_CACHE_DISK', 'r2'),
         'max_size_mb' => env('IMAGE_TRANSFORM_CACHE_MAX_SIZE_MB', 100), // 100 MB
         'clear_to_percent' => env('IMAGE_TRANSFORM_CACHE_CLEAR_TO_PERCENT', 80), // 80% of max size
     ],
