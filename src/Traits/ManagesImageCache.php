@@ -97,6 +97,8 @@ trait ManagesImageCache
 
     /**
      * Store image in cache with size management.
+     *
+     * @param  array<string, int|string>  $options
      */
     protected function storeCachedImage(?string $pathPrefix, ?string $path, array $options, EncodedImageInterface $encoded): void
     {
@@ -118,6 +120,8 @@ trait ManagesImageCache
 
     /**
      * Get the cache path for the given path and options.
+     *
+     * @param  array<string, int|string>  $options
      */
     protected function getCachePath(?string $pathPrefix, ?string $path, array $options): string
     {
@@ -126,6 +130,11 @@ trait ManagesImageCache
         return Storage::disk(config()->string('image-transform-url.cache.disk'))->path($cachePath);
     }
 
+    /**
+     * Get the end (relative) path for storing the cached image.
+     *
+     * @param  array<string, int|string>  $options
+     */
     protected function getCacheEndPath(?string $pathPrefix, ?string $path, array $options): string
     {
         $optionsHash = md5(json_encode($options));

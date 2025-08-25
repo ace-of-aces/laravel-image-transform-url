@@ -11,11 +11,17 @@ enum AllowedMimeTypes: string
     case Webp = 'image/webp';
     case Gif = 'image/gif';
 
+    /**
+     * @return array<string>
+     */
     public static function all(): array
     {
         return array_map(fn (self $mimeType) => $mimeType->value, self::cases());
     }
 
+    /**
+     * @return array<array{mime: string, extension: string}>
+     */
     public static function withExtension(): array
     {
         return array_map(

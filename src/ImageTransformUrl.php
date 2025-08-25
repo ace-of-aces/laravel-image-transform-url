@@ -15,7 +15,7 @@ class ImageTransformUrl
      * Generate a regular URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
-     * @param  array|string  $options  The transformation options.
+     * @param  array<string, int|string>|string  $options  The transformation options.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
      * @return string The generated URL.
      */
@@ -34,7 +34,7 @@ class ImageTransformUrl
      * Generate a regular URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
-     * @param  array|string  $options  The transformation options.
+     * @param  array<string, int|string>|string  $options  The transformation options.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
      * @return string The generated URL.
      */
@@ -47,7 +47,7 @@ class ImageTransformUrl
      * Generate a signed URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
-     * @param  array|string  $options  The transformation options.
+     * @param  array<string, int|string>|string  $options  The transformation options.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
      * @param  DateTimeInterface|\DateInterval|int|null  $expiration  The expiration time for the signed URL.
      * @return string The signed URL.
@@ -83,7 +83,7 @@ class ImageTransformUrl
      * Generate a temporary signed URL for the image transformation.
      *
      * @param  string  $path  The path to the image.
-     * @param  array|string  $options  The transformation options.
+     * @param  array<string, int|string>|string  $options  The transformation options.
      * @param  DateTimeInterface|DateInterval|int  $expiration  The expiration time for the signed URL.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
      * @param  bool|null  $absolute  Whether the URL should be absolute. Defaults to true.
@@ -98,6 +98,8 @@ class ImageTransformUrl
 
     /**
      * Convert array options to a string format suitable for URL generation.
+     *
+     * @param  array<string, int|string>|string  $options
      */
     protected function optionsToString(array|string $options): string
     {

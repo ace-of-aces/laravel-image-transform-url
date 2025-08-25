@@ -268,7 +268,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     /**
      * Parse the given options.
      *
-     * @return array<string, int>
+     * @return array<string, int|string>
      */
     protected static function parseOptions(string $options): array
     {

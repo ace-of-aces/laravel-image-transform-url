@@ -10,6 +10,8 @@ trait ResolvesOptions
 {
     /**
      * Get the positive int value of the given option.
+     *
+     * @param  array<string, int|string|null>  $options
      */
     protected static function getPositiveIntOptionValue(array $options, string $option, ?int $max = null, ?int $fallback = null): ?int
     {
@@ -23,6 +25,8 @@ trait ResolvesOptions
 
     /**
      * Get the unsigned int value of the given option.
+     *
+     * @param  array<string, int|string|null>  $options
      */
     protected static function getUnsignedIntOptionValue(array $options, string $option, ?int $fallback = null, ?int $min = null, ?int $max = null): ?int
     {
@@ -37,6 +41,8 @@ trait ResolvesOptions
 
     /**
      * Get the string value of the given option.
+     *
+     * @param  array<string, int|string|null>  $options
      */
     protected static function getStringOptionValue(array $options, string $option, ?string $default = null): ?string
     {
@@ -48,6 +54,7 @@ trait ResolvesOptions
      * Get the select option value of the given option.
      *
      * @param  array<string>  $allowedValues
+     * @param  array<string, int|string|null>  $options
      */
     protected static function getSelectOptionValue(array $options, string $option, array $allowedValues, ?string $default = null): ?string
     {

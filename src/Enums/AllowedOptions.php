@@ -16,11 +16,17 @@ enum AllowedOptions: string
     case Version = 'version';
     case Background = 'background';
 
+    /**
+     * @return array<string>
+     */
     public static function all(): array
     {
         return array_map(fn (self $option) => $option->value, self::cases());
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function withTypes(): array
     {
         return [
