@@ -1,0 +1,9 @@
+{
+  "name": "laravel-image-transform-url",
+  "scripts": {},
+  "author": "Julian Schramm",
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}
