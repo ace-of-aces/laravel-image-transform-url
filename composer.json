@@ -3,7 +3,12 @@
     "description": "Easy, URL-based image transformations inspired by Cloudflare Images.",
     "keywords": [
         "laravel",
-        "laravel-image-transform-url"
+        "laravel-image-transform-url",
+        "image transformation",
+        "image manipulation",
+        "resize",
+        "cropping",
+        "intervention"
     ],
     "homepage": "https://github.com/ace-of-aces/laravel-image-transform-url",
     "license": "MIT",
