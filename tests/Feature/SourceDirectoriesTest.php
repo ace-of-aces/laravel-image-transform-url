@@ -15,7 +15,7 @@ beforeEach(function () {
 it('can serve from the storage directory', function () {
 
     $imagePath = 'images/test.jpg';
-    Storage::disk('public')->put($imagePath, file_get_contents(__DIR__.'/../../workbench/test-data/cat.jpg'));
+    Storage::disk('public')->put($imagePath, file_get_contents(public_path('images/cat.jpg')));
 
     $response = $this->get(route('image.transform', [
         'options' => 'width=100',
@@ -34,7 +34,7 @@ it('can use the storage directory as the default source directory', function () 
     config()->set('image-transform-url.default_source_directory', 'storage');
 
     $imagePath = 'images/test.jpg';
-    Storage::disk('public')->put($imagePath, file_get_contents(__DIR__.'/../../workbench/test-data/cat.jpg'));
+    Storage::disk('public')->put($imagePath, file_get_contents(public_path('images/cat.jpg')));
 
     $response = $this->get(route('image.transform.default', [
         'options' => 'width=100',

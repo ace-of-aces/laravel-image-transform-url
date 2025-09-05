@@ -19,7 +19,7 @@ return [
     */
 
     'source_directories' => [
-        'images-test' => public_path('images'),
+        'images' => public_path('images'),
         'storage' => storage_path('app/public/images'),
         'remote' => ['disk' => 'r2'],
     ],
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images-test'),
+    'default_source_directory' => env('IMAGE_TRANSFORM_DEFAULT_SOURCE_DIRECTORY', 'images'),
 
     /*
     |--------------------------------------------------------------------------

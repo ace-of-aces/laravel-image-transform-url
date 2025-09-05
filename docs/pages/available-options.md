@@ -32,7 +32,7 @@ blur=50
 ```
 
 > [!CAUTION]
-> The `blur` option is a resource-intensive operation and may cause memory issues if the image is too large. It is recommended to use this option with caution and test beforehand, or disable it in the config.
+> When using the default GD driver, `blur` is very resource-intensive and may cause memory issues if the image is too large. We recommend the [Imagick driver](/installation#driver-configuration) if you want to use this option, or else to leave it disabled in the config.
 
 ## `contrast`
 

@@ -88,7 +88,7 @@ it('can manage cache size limit by cleaning up old files', function () {
         ]));
 
         $disk = Storage::disk(config()->string('image-transform-url.cache.disk'));
-        $size = $disk->size($this->getCacheEndPath('test-data', 'cat.jpg', ['width' => 1200, 'version' => $i]));
+        $size = $disk->size($this->getCacheEndPath('images', 'cat.jpg', ['width' => 1200, 'version' => $i]));
 
         $totalSizeMB += $size / (1024 * 1024);
 
@@ -144,7 +144,7 @@ it('deletes files in the right order when cleaning up the cache', function () {
         ]));
 
         $disk = Storage::disk(config()->string('image-transform-url.cache.disk'));
-        $endPath = $this->getCacheEndPath('test-data', 'cat.jpg', ['width' => 1200, 'version' => $i]);
+        $endPath = $this->getCacheEndPath('images', 'cat.jpg', ['width' => 1200, 'version' => $i]);
 
         $cacheFilePaths[] = $endPath;
 
@@ -173,7 +173,7 @@ it('deletes files in the right order when cleaning up the cache', function () {
         'path' => 'cat.jpg',
     ]));
 
-    $lastCacheFilePath = $this->getCacheEndPath('test-data', 'cat.jpg', ['width' => 2400, 'version' => 99]);
+    $lastCacheFilePath = $this->getCacheEndPath('images', 'cat.jpg', ['width' => 2400, 'version' => 99]);
 
     $finalResponse->assertOk();
     $finalResponse->assertHeader('X-Cache', 'MISS');

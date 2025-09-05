@@ -9,7 +9,18 @@ use Illuminate\Support\Facades\Storage;
 beforeEach(function () {
     Cache::flush();
     Storage::fake(config()->string('image-transform-url.cache.disk'));
-});
+})->with([
+    function () {
+        config()->set('image.driver', \Intervention\Image\Drivers\Gd\Driver::class);
+
+        return 'gd';
+    },
+    function () {
+        config()->set('image.driver', \Intervention\Image\Drivers\Imagick\Driver::class);
+
+        return 'imagick';
+    },
+]);
 
 it('can process the height option', function () {
     /** @var TestCase $this */
