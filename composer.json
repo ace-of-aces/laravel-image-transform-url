@@ -25,6 +25,8 @@
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "ext-gd": "*",
+        "ext-imagick": "*",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.14",
         "league/flysystem-aws-s3-v3": "^3.0",
