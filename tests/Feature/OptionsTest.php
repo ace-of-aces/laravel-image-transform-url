@@ -12,12 +12,14 @@ beforeEach(function () {
 })->with([
     function () {
         config()->set('image.driver', \Intervention\Image\Drivers\Gd\Driver::class);
+
         return 'gd';
     },
     function () {
         config()->set('image.driver', \Intervention\Image\Drivers\Imagick\Driver::class);
+
         return 'imagick';
-    }
+    },
 ]);
 
 it('can process the height option', function () {
