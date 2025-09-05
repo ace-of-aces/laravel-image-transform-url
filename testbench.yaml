@@ -23,9 +23,6 @@ workbench:
     config: true
   build:
     - asset-publish
-    - create-sqlite-db
-    - db-wipe
-    - migrate-fresh
     - storage-link
   assets:
     - test-assets

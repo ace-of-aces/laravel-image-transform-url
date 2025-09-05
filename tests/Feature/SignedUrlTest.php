@@ -16,17 +16,14 @@ function configureTestEnvironment(): void
 {
     config()->set('image-transform-url.signed_urls.enabled', true);
     config()->set('image-transform-url.signed_urls.for_source_directories', ['protected']);
-    config()->set('image-transform-url.source_directories', [
-        'test-data' => public_path('test-data'),
-        'protected' => Storage::fake('local')->path('protected'),
-    ]);
+    config()->set('image-transform-url.source_directories.protected', Storage::fake('local')->path('protected'));
 }
 
 it('can protect a route with a signed URL', function () {
     /** @var TestCase $this */
     configureTestEnvironment();
 
-    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('test-data/cat.jpg')));
+    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
 
     assert(Storage::disk('local')->exists('protected/cat.jpg'));
 
@@ -53,7 +50,7 @@ it('can protect a route with a temporary signed URL that expires', function () {
     /** @var TestCase $this */
     configureTestEnvironment();
 
-    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('test-data/cat.jpg')));
+    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
 
     assert(Storage::disk('local')->exists('protected/cat.jpg'));
 
@@ -80,7 +77,7 @@ it('cannot manipulate signatures to access images', function () {
     /** @var TestCase $this */
     configureTestEnvironment();
 
-    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('test-data/cat.jpg')));
+    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
 
     assert(Storage::disk('local')->exists('protected/cat.jpg'));
 
@@ -103,7 +100,7 @@ it('can use a protected directory as default source directory', function () {
 
     config()->set('image-transform-url.default_source_directory', 'protected');
 
-    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('test-data/cat.jpg')));
+    Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
 
     assert(Storage::disk('local')->exists('protected/cat.jpg'));
 

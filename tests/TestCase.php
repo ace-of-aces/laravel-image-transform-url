@@ -43,11 +43,7 @@ class TestCase extends Orchestra
     protected function defineEnvironment($app)
     {
         tap($app['config'], function (Repository $config) {
-            $config->set('image-transform-url.source_directories', [
-                'test-data' => public_path('test-data'),
-                'storage' => Storage::fake('public')->path(''),
-            ]);
-            $config->set('image-transform-url.default_source_directory', 'test-data');
+            $config->set('image-transform-url.source_directories.storage', Storage::fake('public')->path(''));
             $config->set('image-transform-url.enabled_options', AllowedOptions::all());
         });
     }
