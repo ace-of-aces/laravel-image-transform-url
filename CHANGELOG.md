@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.0.0 🚀 - 2025-09-06
+
+### v1.0.0 - Stable Release! 🎉
+
+#### What's Changed
+
+* [Fix] Replace GD specific WebpEncoder with general WebpEncoder by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/17
+* [Docs + Test] Properly support multiple image drivers by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/18
+* [Docs] Added vite-plugin-llms: https://github.com/ace-of-aces/laravel-image-transform-url/commit/f3da2f9955c9ffcd08f2657b2cd088c28e2765ac
+* [Docs] wording improvements: https://github.com/ace-of-aces/laravel-image-transform-url/commit/30a22db1824623d4c0063f6b4f3213a5e8c62c62
+* chore(deps): bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/14
+* chore(deps): bump actions/upload-pages-artifact from 3 to 4 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/15
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v0.9.0...v1.0.0
+
 ## v0.9.0 - 2025-08-13
 
 ### What's Changed
