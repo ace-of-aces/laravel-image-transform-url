@@ -17,7 +17,7 @@ features:
     - title: ✈️ On-the-fly
       details: Use URL parameters to transform images on the fly
     - title: 🔧 Versatile
-      details: Support for various transformations like resizing, compression, and format conversion
+      details: Support various transformations, S3 storage and signed URLs
     - title: ⚡ Fast and Efficient
       details: Automatic caching of transformed images for faster loading times
     - title: 🌍 CDN Ready
