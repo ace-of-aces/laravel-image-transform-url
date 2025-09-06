@@ -1,6 +1,6 @@
 # Configuring Options
 
-This package supports a variety of options, but you may not need or want to use all of them. You can configure which options are enabled in the `image-transform-url.php` configuration file.
+This package supports a variety of options, but you may not need all of them. You can configure which options are enabled in the `image-transform-url.php` configuration file.
 
 ```php
 /*

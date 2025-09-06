@@ -1,8 +1,8 @@
 # Setup
 
-1. Configure the package via `image-transform-url.php` to set your `source_directories`, from where you want to transform the images. By default, the package will look for `images` directories in your `public` folder and in the `storage/app/public` directory.
+1. Configure the package via `image-transform-url.php` to set your `source_directories`, from where you want to transform the images. By default, the package looks for `images` directories in your `public` folder and in the `storage/app/public` directory.
 
-2. Choose a default source directory by setting the `default_source_directory` option in the `image-transform-url.php` configuration file. This will be used if no source directory is specified in the URL.
+2. Choose a default source directory by setting the `default_source_directory` option in the `image-transform-url.php` configuration file. This is used if no source directory is specified in the URL.
 
 > [!TIP]
 > It is recommended to use dedicated subdirectories for your images in order to avoid conflicts with other files.
@@ -45,7 +45,8 @@ An example source directory configuration might look like this:
 ```
 
 ## Configuring Remote Sources
-If you want to use a remote source (like AWS S3 or Cloudflare R2) as a source directory, you can configure any [Laravel Filesystem disk](https://laravel.com/docs/filesystem#configuration) in your `config/filesystems.php` file and then reference it in the `source_directories` configuration.
+
+If you want to use a remote source (like AWS S3 or Cloudflare R2) as a source directory, you may configure any [Laravel Filesystem disk](https://laravel.com/docs/filesystem#configuration) in your `config/filesystems.php` file and then reference it in the `source_directories` configuration.
 
 ```php
 'source_directories' => [
@@ -57,4 +58,4 @@ If you want to use a remote source (like AWS S3 or Cloudflare R2) as a source di
 ],
 ```
 
-Read the [full guide on how to use this package with S3](/s3-usage.md).
+Read the [full guide on how to use this package with S3](/s3-usage).

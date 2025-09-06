@@ -2,7 +2,7 @@
 
 The package is designed to work seamlessly with CDNs like Cloudflare, BunnyCDN, and others.
 
-The most important configuration is the [`Cache-Control`](https://developer.mozilla.org/de/docs/Web/HTTP/Reference/Headers/Cache-Control) header, which you can customize to your liking in the `image-transform-url.php` configuration file.
+The most important configuration is the [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) header, which you can customize in the `image-transform-url.php` configuration file.
 
 ```php
 /*

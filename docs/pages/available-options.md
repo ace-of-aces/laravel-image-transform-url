@@ -6,7 +6,7 @@ These are the options that can be used to transform images with this package.
 
 `string`
 
-Set the background color of the image.  
+Set the background color of the image.
 Any valid HEX color value (without a leading `#`).
 
 Example:
@@ -38,7 +38,7 @@ blur=50
 
 `integer`
 
-Set the contrast level of the image.  
+Set the contrast level of the image.
 Possible values: `-100` to `100`.
 
 Example:
@@ -51,7 +51,7 @@ contrast=50
 
 `string`
 
-Flip the image.  
+Flip the image.
 Possible values: `h` (horizontal), `v` (vertical), `hv` (horizontal and vertical).
 
 Example:
@@ -64,7 +64,7 @@ flip=h
 
 `string`
 
-Set the format of the image.  
+Set the format of the image.
 Supported formats: `jpg`, `jpeg`, `png`, `gif`, `webp`.
 
 Example:
@@ -77,7 +77,7 @@ format=webp
 
 `integer`
 
-Set the height of the image.  
+Set the height of the image.
 Values greater than the original height will be ignored.
 
 Example:
@@ -90,7 +90,7 @@ height=250
 
 `integer`
 
-Set the quality of the image.  
+Set the quality of the image.
 Possible values: `0` to `100`.
 
 Example:
@@ -103,7 +103,7 @@ quality=80
 
 `integer`
 
-Version number of the image.  
+Version number of the image.
 Any positive integer. More info in the [Image Caching](/image-caching) section.
 
 Example:
@@ -116,7 +116,7 @@ version=2
 
 `integer`
 
-Set the width of the image.  
+Set the width of the image.
 Values greater than the original width will be ignored.
 
 Example:

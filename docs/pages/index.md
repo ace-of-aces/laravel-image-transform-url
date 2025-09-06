@@ -15,11 +15,11 @@ hero:
 
 features:
     - title: ✈️ On-the-fly
-      details: Use URL parameters to transform images on the fly
+      details: Transform images on the fly via URL parameters
     - title: 🔧 Versatile
-      details: Support various transformations, S3 storage and signed URLs
+      details: Supports various transformations, S3 storage, and signed URLs
     - title: ⚡ Fast and Efficient
-      details: Automatic caching of transformed images for faster loading times
+      details: Automatic caching of transformed images for faster load times
     - title: 🌍 CDN Ready
-      details: Easy integration with CDNs for even faster global delivery
+      details: Easy CDN integration for faster global delivery
 ---

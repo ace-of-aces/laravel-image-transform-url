@@ -1,13 +1,13 @@
 # Usage with S3
 
 This guide explains how to configure this package to work with S3-compatible storage services like AWS S3 or Cloudflare R2.
-This enables you to transform and serve images stored remotely without the need to store images on your local server.
+This lets you transform and serve images stored remotely without the need to store them on your local server.
 
-1. Set up your S3 disk in your [filesystems configuration](https://laravel.com/docs/filesystem#amazon-s3-compatible-filesystems), install the [S3 package](https://laravel.com/docs/filesystem#s3-driver-configuration) and ensure you have the necessary credentials and settings for your S3 bucket. Public bucket access is not required.
+1. Set up your S3 disk in your [filesystems configuration](https://laravel.com/docs/filesystem#amazon-s3-compatible-filesystems), install the [S3 package](https://laravel.com/docs/filesystem#s3-driver-configuration), and ensure you have the necessary credentials and settings for your S3 bucket. Public bucket access is not required.
 
 2. Configure the package via `image-transform-url.php` to include your S3 disk in the `source_directories` as described in [the setup guide](/setup#configuring-remote-sources).
 
-3. If you are using the [Image Caching](/image-caching) feature and want to store transformed images back to your S3 bucket instead of your local filesystem, you may also set the `cache.disk` option in the `image-transform-url.php` configuration file to your S3 disk.
+3. If you are using the [Image Caching](/image-caching) feature and want to store transformed images back to your S3 bucket instead of your local filesystem, set the `cache.disk` option in the `image-transform-url.php` configuration file to your S3 disk.
 
 ```php
 'cache' => [

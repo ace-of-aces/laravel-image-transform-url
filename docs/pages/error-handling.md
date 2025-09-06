@@ -1,22 +1,22 @@
 # Error Handling
 
-The route handler of this package is designed to be robust against invalid options, paths and file names, while also not exposing additional information of your applications public directory structure.
+The route handler of this package is designed to be robust against invalid options, paths, and file names, while also not exposing additional information about your application's public directory structure.
 
 ## HTTP Status Codes
 
-This is why the route handler will return a plain `404` response if:
+For this reason, the route handler returns a plain `404` response if:
 
--   a requested image does not exist at the specified path
--   the requested image is not a valid image file
+-   the requested image does not exist at the specified path
+-   the requested file is not a valid image
 -   the provided options are not in the correct format (`key=value`, no trailing comma, etc.)
 
 The only two other HTTP errors that can be returned are:
 - a `429` response, which indicates that the request was rate-limited
-- a `403` response, which indicates that the request was unauthorized (e.g. when using signed URLs and the signature is invalid or expired)
+- a `403` response, which indicates that the request was unauthorized (e.g., when using signed URLs and the signature is invalid or expired)
 
 ## Invalid options
 
-If parts of the given route options are invalid, the route handler will ignore them and only apply the valid options.
+If parts of the given route options are invalid, the route handler ignores them and applies only the valid options.
 
 Example:
 

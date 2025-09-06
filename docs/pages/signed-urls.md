@@ -2,14 +2,14 @@
 
 This package provides the option to generate signed URLs for images from specific source directories powered by [Laravel's URL signing feature](https://laravel.com/docs/urls#signed-urls).
 
-This can be useful for securing access to images that should not be publicly accessible without proper authorization or only in a scaled down version.
+This can be useful for securing access to images that should not be publicly accessible without proper authorization or should only be available in a scaled-down version.
 
 ::: info
 Signed URLs also ensure that the provided options cannot be modified client-side.
 :::
 
 ::: warning
-The Signed URL feature does not restrict access to public images.
+The signed URL feature does not restrict access to public images.
 If you want to secure access to images, ensure that the source directories you want signed URLs for are not publicly accessible.
 :::
 
@@ -17,7 +17,7 @@ If you want to secure access to images, ensure that the source directories you w
 
 To enable signed URLs, set the `signed_urls.enabled` option to `true` in your `image-transform-url.php` configuration.
 
-You then need to specify the source directories for which signed URLs should apply to in the `signed_urls.source_directories` array.
+You then need to specify the source directories to which signed URLs should apply in the `signed_urls.for_source_directories` array.
 
 For example:
 
@@ -32,7 +32,7 @@ For example:
 'signed_urls' => [
     'enabled' => env('IMAGE_TRANSFORM_SIGNED_URLS_ENABLED', false),
     'for_source_directories' => env('IMAGE_TRANSFORM_SIGNED_URLS_FOR_SOURCE_DIRECTORIES', [
-        'protected-images',
+        'protected',
     ]),
 ],
 ```
@@ -46,7 +46,7 @@ use AceOfAces\LaravelImageTransformUrl\Facades\ImageTransformUrl;
 
 $options = [
     'blur' => 50,
-    'width' 500,
+    'width' => 500,
 ];
 
 $blurredImage = ImageTransformUrl::signedUrl(
@@ -58,14 +58,14 @@ $blurredImage = ImageTransformUrl::signedUrl(
 
 ## Temporary Signed URLs
 
-If you would like to to generate a signed URL that expires after a certain time, you can use the `temporarySignedUrl` method:
+If you would like to generate a signed URL that expires after a certain time, you can use the `temporarySignedUrl` method:
 
 ```php
 use AceOfAces\LaravelImageTransformUrl\Facades\ImageTransformUrl;
 
 $options = [
     'blur' => 50,
-    'width' 500,
+    'width' => 500,
 ];
 
 $temporarySignedUrl = ImageTransformUrl::temporarySignedUrl(
@@ -77,6 +77,5 @@ $temporarySignedUrl = ImageTransformUrl::temporarySignedUrl(
 ```
 
 ::: info
-You can also use the generic `signedUrl` method to generate temporary signed URLs.
-This method accepts an `$expiration` parameter, which defaults to `null`. If you provide a value, it will generate a temporary signed URL.
+You can also use the generic `signedUrl` method to generate temporary signed URLs. This method accepts an `$expiration` parameter, which defaults to `null`. If you provide a value, it generates a temporary signed URL.
 :::

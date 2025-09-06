@@ -17,7 +17,7 @@ For example:
 http://[96mlocalhost:8000[39m/[31mimage-transform[39m/[94mwidth=250,quality=80,format=webp[39m/[93mfoo/bar/example.jpg
 ```
 
-With a `source-directory`, respectively:
+With a `source-directory`:
 
 ```ansi
 http://[96mlocalhost:8000[39m/[31mimage-transform[39m/[95mimages[39m/[94mwidth=250,quality=80,format=webp[39m/[93mfoo/bar/example.jpg
@@ -25,7 +25,7 @@ http://[96mlocalhost:8000[39m/[31mimage-transform[39m/[95mimages[39m/[94m
 
 ## Programmatic URL Generation
 
-While you can construct URLs manually when you need it, the package provides convenient methods to generate transformation URLs programmatically using the `ImageTransformUrl` facade.
+While you can construct URLs manually when needed, the package provides convenient methods to generate transformation URLs programmatically using the `ImageTransformUrl` facade.
 
 Use the `make()` method to generate regular transformation URLs:
 
