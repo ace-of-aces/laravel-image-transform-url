@@ -94,10 +94,9 @@ return [
     | Rate Limit
     |--------------------------------------------------------------------------
     |
-    | Below you may configure the rate limit which is applied for each image
-    | new transformation by the path and IP address. It is recommended to
-    | set this to a low value, e.g. 2 requests per minute, to prevent
-    | abuse.
+    | Below you may configure the rate limit applied to each image transformation
+    | by path and IP address. It is recommended to set this to a low value,
+    | e.g. 2 requests per minute, to prevent abuse.
     |
     */
 
