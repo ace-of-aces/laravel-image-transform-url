@@ -35,7 +35,7 @@ jobs:
         with:
           version: 9 # Not needed if you've set "packageManager" in package.json
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: pnpm
