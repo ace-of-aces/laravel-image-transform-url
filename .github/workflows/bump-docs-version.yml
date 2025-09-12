@@ -1,8 +1,8 @@
-name: "Bump Docs Version"
+name: Bump Docs Version
 
 on:
   release:
-    types: [released]
+    types: [published, released]
   workflow_dispatch:
 
 permissions:
@@ -49,8 +49,13 @@ jobs:
           echo "Updated docs/package.json to version ${{ steps.extract_version.outputs.version }}"
 
       - name: Commit updated package.json
+        id: commit
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           branch: main
           commit_message: "chore(docs): bump version to ${{ steps.extract_version.outputs.version }}"
           file_pattern: "docs/package.json"
+
+      - name: Expose commit SHA
+        id: meta
+        run: echo "commit_sha=${GITHUB_SHA}" >> $GITHUB_OUTPUT
