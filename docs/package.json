@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "devDependencies": {
         "vitepress": "^1.6.4",
         "vitepress-plugin-llms": "^1.7.3"
