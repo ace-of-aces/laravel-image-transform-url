@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.0.1 - 2025-11-17
+
+### What's Changed
+
+* fix: correct facade PHPDoc annotation for temporarySignedUrl 4082852272542fbe42dc33bb2d86f7a2e6ad8af6
+* docs: use named parameters in code examples 0c54d9068ddc5b45101213a3000a46aa9fc93440
+* docs: update links 8752beed70cb2e4049b2756d7647ea128a672c96
+* chore(deps): bump actions/setup-node from 4 to 5 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/19
+* chore(deps): bump actions/setup-node from 5 to 6 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/21
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/20
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.0.0...v1.0.1
+
 ## v1.0.0 🚀 - 2025-09-06
 
 ### v1.0.0 - Stable Release! 🎉
