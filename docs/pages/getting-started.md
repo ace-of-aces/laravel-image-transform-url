@@ -34,29 +34,32 @@ use AceOfAces\LaravelImageTransformUrl\Facades\ImageTransformUrl;
 
 // Generate a URL with array options
 $url = ImageTransformUrl::make(
-    'foo/example.jpg',
-    ['width' => 250, 'quality' => 80, 'format' => 'webp'],
-    'images'
+    path: 'foo/example.jpg',
+    options: ['width' => 250, 'quality' => 80, 'format' => 'webp'],
+    pathPrefix: 'images'
 );
 
 // Generate a URL with string options
 $url = ImageTransformUrl::make(
-    'foo/example.jpg',
-    'width=250,quality=80,format=webp',
-    'images'
+    path: 'foo/example.jpg',
+    options: 'width=250,quality=80,format=webp',
+    pathPrefix: 'images'
 );
 
-// Use default source directory (omit the third parameter)
+// Use default source directory (omit the pathPrefix parameter)
 $url = ImageTransformUrl::make(
-    'foo/example.jpg',
-    ['width' => 250, 'quality' => 80]
+    path: 'foo/example.jpg',
+    options: ['width' => 250, 'quality' => 80]
 );
 ```
 
 The `url()` method is also available as an alias for `make()`:
 
 ```php
-$url = ImageTransformUrl::url('img/example.jpg', ['width' => 250]);
+$url = ImageTransformUrl::url(
+    path: 'img/example.jpg',
+    options: ['width' => 250]
+);
 ```
 
 ::: info

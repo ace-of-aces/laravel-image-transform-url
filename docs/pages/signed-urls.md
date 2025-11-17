@@ -69,10 +69,10 @@ $options = [
 ];
 
 $temporarySignedUrl = ImageTransformUrl::temporarySignedUrl(
-    'example.jpg',
-    $options,
-    now()->addMinutes(60),
-    'protected'
+    path: 'example.jpg',
+    options: $options,
+    expiration: now()->addMinutes(60),
+    pathPrefix: 'protected'
 );
 ```
 
