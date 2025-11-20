@@ -1,8 +1,9 @@
 name: Bump Docs Version
 
 on:
-  release:
-    types: [published, released]
+  workflow_run:
+    workflows: ["Update Changelog"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
