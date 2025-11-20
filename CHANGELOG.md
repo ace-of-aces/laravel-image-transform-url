@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.1.0 - 2025-11-20
+
+### What's Changed
+
+* [Feat]: Guidelines for Laravel Boost by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/22
+* Updated `.gitattributes` which removes unnecessary files from the package installation b7c555cdb56071e451eddc003fdd17ecfb67c23b
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.0.1...v1.1.0
+
 ## v1.0.1 - 2025-11-17
 
 ### What's Changed
