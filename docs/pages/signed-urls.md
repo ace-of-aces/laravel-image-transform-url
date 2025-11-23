@@ -50,9 +50,9 @@ $options = [
 ];
 
 $blurredImage = ImageTransformUrl::signedUrl(
-    'example.jpg',
-    $options,
-    'protected'
+    path: 'example.jpg',
+    options: $options,
+    pathPrefix: 'protected'
 );
 ```
 
