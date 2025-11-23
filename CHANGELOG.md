@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.2.0 - 2025-11-23
+
+### What's Changed
+
+* Extend PHP version support with 8.3 and 8.5 by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/23
+
+**Docs**
+
+* Updated a docs code snippet 23722625ddf6a7b6af848b2aa59532cbecf37308
+* Updated the docs theme 💅🏻 c41e654baf5308ac7f3f7e050e1b70ebeb10315f
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.1.0...v1.2.0
+
 ## v1.1.0 - 2025-11-20
 
 ### What's Changed
