@@ -2,7 +2,7 @@
 
 ## Requirements
 
--   PHP \>= 8.4
+-   PHP \>= 8.3
 -   Laravel 12.x
 -   [GD](https://www.php.net/manual/en/book.image.php) or [Imagick](https://www.php.net/manual/en/book.imagick.php) PHP extension installed and [enabled](#driver-configuration)
 
