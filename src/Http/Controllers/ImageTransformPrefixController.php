@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AceOfAces\LaravelImageTransformUrl\Http\Controllers;
 
 use AceOfAces\LaravelImageTransformUrl\Actions\TransformImageAction;
-use AceOfAces\LaravelImageTransformUrl\Traits\HasImageResponse;
+use AceOfAces\LaravelImageTransformUrl\Concerns\HasImageResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

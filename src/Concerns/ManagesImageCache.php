@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AceOfAces\LaravelImageTransformUrl\Traits;
+namespace AceOfAces\LaravelImageTransformUrl\Concerns;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Cache;

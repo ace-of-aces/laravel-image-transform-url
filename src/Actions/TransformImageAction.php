@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AceOfAces\LaravelImageTransformUrl\Actions;
 
+use AceOfAces\LaravelImageTransformUrl\Concerns\ManagesImageCache;
+use AceOfAces\LaravelImageTransformUrl\Concerns\ResolvesOptions;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
-use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
-use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
 use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageResult;
 use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageSource;
 use Illuminate\Support\Arr;

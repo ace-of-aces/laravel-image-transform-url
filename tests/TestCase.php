@@ -2,9 +2,9 @@
 
 namespace AceOfAces\LaravelImageTransformUrl\Tests;
 
+use AceOfAces\LaravelImageTransformUrl\Concerns\ManagesImageCache;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\ImageTransformUrlServiceProvider;
-use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\ServiceProvider as InterventionImageServiceProvider;
