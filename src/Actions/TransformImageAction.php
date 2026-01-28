@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AceOfAces\LaravelImageTransformUrl\Http\Controllers;
+namespace AceOfAces\LaravelImageTransformUrl\Actions;
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\Traits\ManagesImageCache;
 use AceOfAces\LaravelImageTransformUrl\Traits\ResolvesOptions;
+use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageResult;
 use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageSource;
-use Illuminate\Filesystem\FilesystemAdapter;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -26,30 +24,17 @@ use Intervention\Image\Encoders\PngEncoder;
 use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\Laravel\Facades\Image;
 
-class ImageTransformerController extends \Illuminate\Routing\Controller
+class TransformImageAction
 {
     use ManagesImageCache, ResolvesOptions;
 
     /**
-     * Transform an image with a specified path prefix and custom options.
+     * Handle the image transformation.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function transformWithPrefix(Request $request, string $pathPrefix, string $options, string $path): Response
-    {
-        return $this->handleTransform($request, $pathPrefix, $options, $path);
-    }
-
-    /**
-     * Transform an image with the default path prefix and custom options.
-     */
-    public function transformDefault(Request $request, string $options, string $path): Response
-    {
-        return $this->handleTransform($request, null, $options, $path);
-    }
-
-    /**
-     * Handle the image transformation logic.
-     */
-    protected function handleTransform(Request $request, ?string $pathPrefix, string $options, ?string $path = null): Response
+    public function handle(?string $ip, ?string $pathPrefix, string $options, ?string $path = null): ImageResult
     {
         $source = $this->handlePath($pathPrefix, $path);
 
@@ -60,8 +45,8 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
             if (File::exists($cachePath)) {
                 if (Cache::has('image-transform-url:'.$cachePath)) {
-                    return $this->imageResponse(
-                        imageContent: File::get($cachePath),
+                    return new ImageResult(
+                        content: File::get($cachePath),
                         mimeType: File::mimeType($cachePath),
                         cacheHit: true
                     );
@@ -75,7 +60,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             config()->boolean('image-transform-url.rate_limit.enabled') &&
             ! in_array(App::environment(), config()->array('image-transform-url.rate_limit.disabled_for_environments'))
         ) {
-            $this->rateLimit($request, $path);
+            $this->rateLimit($ip, $path);
         }
 
         $image = match ($source->type) {
@@ -143,12 +128,11 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             });
         }
 
-        return $this->imageResponse(
-            imageContent: $encoded->toString(),
+        return new ImageResult(
+            content: $encoded->toString(),
             mimeType: $encoded->mimetype(),
             cacheHit: false
         );
-
     }
 
     /**
@@ -185,7 +169,7 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
 
             abort_unless(Storage::disk($disk)->exists($diskPath), 404);
 
-            /** @var FilesystemAdapter $diskAdapter */
+            /** @var \Illuminate\Filesystem\FilesystemAdapter $diskAdapter */
             $diskAdapter = Storage::disk($disk);
             $mime = $diskAdapter->mimeType($diskPath);
 
@@ -221,6 +205,23 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
     }
 
     /**
+     * Rate limit the attempt.
+     */
+    protected function rateLimit(?string $ip, string $path): void
+    {
+        $key = 'image-transform-url:'.$ip.':'.$path;
+
+        $passed = RateLimiter::attempt(
+            key: $key,
+            maxAttempts: config()->integer('image-transform-url.rate_limit.max_attempts'),
+            callback: fn () => true,
+            decaySeconds: config()->integer('image-transform-url.rate_limit.decay_seconds'),
+        );
+
+        abort_unless($passed, 429, 'Too many requests. Please try again later.');
+    }
+
+    /**
      * Normalize a relative path by resolving `.` and `..` segments.
      * Returns null if the path escapes above the root.
      */
@@ -246,23 +247,6 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
         }
 
         return implode('/', $stack);
-    }
-
-    /**
-     * Rate limit the request.
-     */
-    protected function rateLimit(Request $request, string $path): void
-    {
-        $key = 'image-transform-url:'.$request->ip().':'.$path;
-
-        $passed = RateLimiter::attempt(
-            key: $key,
-            maxAttempts: config()->integer('image-transform-url.rate_limit.max_attempts'),
-            callback: fn () => true,
-            decaySeconds: config()->integer('image-transform-url.rate_limit.decay_seconds'),
-        );
-
-        abort_unless($passed, 429, 'Too many requests. Please try again later.');
     }
 
     /**
@@ -296,19 +280,5 @@ class ImageTransformerController extends \Illuminate\Routing\Controller
             })->filter(function ($value, $key) {
                 return in_array($key, config()->array('image-transform-url.enabled_options'), true);
             })->toArray();
-    }
-
-    /**
-     * Respond with the image content.
-     */
-    protected static function imageResponse(string $imageContent, string $mimeType, bool $cacheHit = false): Response
-    {
-        return response($imageContent, 200, [
-            'Content-Type' => $mimeType,
-            ...(config()->boolean('image-transform-url.cache.enabled') ? [
-                'X-Cache' => $cacheHit ? 'HIT' : 'MISS',
-            ] : []),
-            ...(config()->array('image-transform-url.headers')),
-        ]);
     }
 }
