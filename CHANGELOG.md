@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.3.0 - 2026-01-28
+
+### What's Changed
+
+* Architectural refactorings in 453eac2178a408632b1c3ab8f59326f0e0ff24cc and 08f00ad13e3a96063a29ba950a0d29d0f8e158ac. **No functional changes as long as you don't rely on undocumented internals of this package**.
+* chore(deps): bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/24
+* chore(deps): bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/25
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.2.0...v1.3.0
+
 ## v1.2.0 - 2025-11-23
 
 ### What's Changed
