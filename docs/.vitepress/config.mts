@@ -8,6 +8,9 @@ export default defineConfig({
     description: "Easy, URL-based image transformations for Laravel inspired by Cloudflare Images.",
     srcDir: './pages',
     cleanUrls: true,
+    sitemap: {
+        hostname: 'https://image-transform-url.julian.center'
+    },
     markdown: {
         theme: {
             light: 'github-light',
