@@ -27,6 +27,7 @@
     "require-dev": {
         "ext-gd": "*",
         "ext-imagick": "*",
+        "ace-of-aces/intellipest": "^0.2.0",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.14",
         "league/flysystem-aws-s3-v3": "^3.0",

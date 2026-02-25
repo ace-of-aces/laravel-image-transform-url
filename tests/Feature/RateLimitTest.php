@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +20,6 @@ it('can apply rate limiting to image transformation requests with distinct optio
     config()->set('image-transform-url.rate_limit.max_attempts', 2);
     config()->set('image-transform-url.rate_limit.decay_seconds', 60);
 
-    /** @var TestCase $this */
     $firstResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
@@ -56,7 +54,6 @@ it('does not apply rate limiting to image transformations with identical options
     config()->set('image-transform-url.rate_limit.max_attempts', 2);
     config()->set('image-transform-url.rate_limit.decay_seconds', 60);
 
-    /** @var TestCase $this */
     $firstResponse = $this->get(route('image.transform.default', [
         'options' => 'width=100',
         'path' => 'cat.jpg',
