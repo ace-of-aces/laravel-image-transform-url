@@ -62,3 +62,9 @@
     --vp-button-alt-hover-bg: var(--vp-c-bg-soft);
     --vp-button-alt-active-bg: var(--vp-c-bg-soft);
 }
+
+*,
+*::before,
+*::after {
+    border-radius: 0 !important;
+}
