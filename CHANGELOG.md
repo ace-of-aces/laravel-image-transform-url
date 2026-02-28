@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v1.3.1 - 2026-02-28
+
+### What's Changed
+
+* Support Laravel 13 by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/26
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.3.0...v1.3.1
+
 ## v1.3.0 - 2026-01-28
 
 ### What's Changed
