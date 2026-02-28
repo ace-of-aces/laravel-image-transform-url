@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Facades\ImageTransformUrl;
-use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +19,6 @@ function configureTestEnvironment(): void
 }
 
 it('can protect a route with a signed URL', function () {
-    /** @var TestCase $this */
     configureTestEnvironment();
 
     Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
@@ -47,7 +45,6 @@ it('can protect a route with a signed URL', function () {
 });
 
 it('can protect a route with a temporary signed URL that expires', function () {
-    /** @var TestCase $this */
     configureTestEnvironment();
 
     Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
@@ -74,7 +71,6 @@ it('can protect a route with a temporary signed URL that expires', function () {
 });
 
 it('cannot manipulate signatures to access images', function () {
-    /** @var TestCase $this */
     configureTestEnvironment();
 
     Storage::disk('local')->put('protected/cat.jpg', file_get_contents(public_path('images/cat.jpg')));
@@ -95,7 +91,6 @@ it('cannot manipulate signatures to access images', function () {
 });
 
 it('can use a protected directory as default source directory', function () {
-    /** @var TestCase $this */
     configureTestEnvironment();
 
     config()->set('image-transform-url.default_source_directory', 'protected');
@@ -116,7 +111,6 @@ it('can use a protected directory as default source directory', function () {
 });
 
 it('can still access an unprotected source directory without signed URLs', function () {
-    /** @var TestCase $this */
     configureTestEnvironment();
 
     $response = $this->get(route('image.transform.default', [

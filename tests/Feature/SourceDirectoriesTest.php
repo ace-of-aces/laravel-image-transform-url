@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +29,6 @@ it('can serve from the storage directory', function () {
 });
 
 it('can use the storage directory as the default source directory', function () {
-    /** @var TestCase $this */
     config()->set('image-transform-url.default_source_directory', 'storage');
 
     $imagePath = 'images/test.jpg';

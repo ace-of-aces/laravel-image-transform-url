@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
-use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +17,6 @@ it('can convert from jpeg to all other allowed mime types', function () {
     );
 
     foreach ($allowedMimeTypes as $allowed) {
-        /** @var TestCase $this */
         $response = $this->get(route('image.transform.default', [
             'options' => 'format='.$allowed['extension'],
             'path' => 'cat.jpg',
@@ -36,7 +34,6 @@ it('can convert from gif to all other allowed mime types', function () {
     );
 
     foreach ($allowedMimeTypes as $allowed) {
-        /** @var TestCase $this */
         $response = $this->get(route('image.transform.default', [
             'options' => 'format='.$allowed['extension'],
             'path' => 'cat-kiss.gif',
@@ -54,7 +51,6 @@ it('can convert from png to all other allowed mime types', function () {
     );
 
     foreach ($allowedMimeTypes as $allowed) {
-        /** @var TestCase $this */
         $response = $this->get(route('image.transform.default', [
             'options' => 'format='.$allowed['extension'],
             'path' => 'cat.png',
@@ -65,13 +61,13 @@ it('can convert from png to all other allowed mime types', function () {
         ]);
     }
 });
+
 it('can convert from webp to all other allowed mime types', function () {
     $allowedMimeTypes = collect(AllowedMimeTypes::withExtension())->filter(
         fn ($allowed) => $allowed['mime'] !== 'image/webp'
     );
 
     foreach ($allowedMimeTypes as $allowed) {
-        /** @var TestCase $this */
         $response = $this->get(route('image.transform.default', [
             'options' => 'format='.$allowed['extension'],
             'path' => 'cat.webp',

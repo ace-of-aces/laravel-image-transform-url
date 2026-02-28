@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +11,6 @@ beforeEach(function () {
 });
 
 it('can serve from the cache after identical requests', function () {
-    /** @var TestCase $this */
     $response = $this->get(route('image.transform.default', [
         'options' => 'width=500',
         'path' => 'cat.jpg',
@@ -31,7 +29,6 @@ it('can serve from the cache after identical requests', function () {
 });
 
 it('can use the version option to revalidate the cache', function () {
-    /** @var TestCase $this */
     $response = $this->get(route('image.transform.default', [
         'options' => 'version=1',
         'path' => 'cat.jpg',
@@ -58,7 +55,6 @@ it('can use the version option to revalidate the cache', function () {
 });
 
 it('can disable the cache', function () {
-    /** @var TestCase $this */
     config()->set('image-transform-url.cache.enabled', false);
 
     for ($i = 0; $i < 2; $i++) {
@@ -73,7 +69,6 @@ it('can disable the cache', function () {
 });
 
 it('can manage cache size limit by cleaning up old files', function () {
-    /** @var TestCase $this */
     // Set a high cache size limit first
     config()->set('image-transform-url.cache.max_size_mb', 100);
 
@@ -129,7 +124,6 @@ it('can manage cache size limit by cleaning up old files', function () {
 });
 
 it('deletes files in the right order when cleaning up the cache', function () {
-    /** @var TestCase $this */
     config()->set('image-transform-url.cache.max_size_mb', 100);
 
     $responses = [];
