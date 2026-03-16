@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
 
 beforeEach(function () {
     Cache::flush();
     Storage::fake(config()->string('image-transform-url.cache.disk'));
 })->with([
     function () {
-        config()->set('image.driver', \Intervention\Image\Drivers\Gd\Driver::class);
+        config()->set('image.driver', Driver::class);
 
         return 'gd';
     },
     function () {
-        config()->set('image.driver', \Intervention\Image\Drivers\Imagick\Driver::class);
+        config()->set('image.driver', Intervention\Image\Drivers\Imagick\Driver::class);
 
         return 'imagick';
     },

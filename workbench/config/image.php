@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\Drivers\Imagick\Driver;
+
 return [
 
     /*
@@ -16,7 +18,7 @@ return [
     |
     */
 
-    'driver' => \Intervention\Image\Drivers\Imagick\Driver::class,
+    'driver' => Driver::class,
 
     /*
     |--------------------------------------------------------------------------

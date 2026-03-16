@@ -15,7 +15,7 @@ class SignedImageTransformMiddleware
     /**
      * Handle an incoming request and conditionally apply signature verification.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -49,7 +49,7 @@ class SignedImageTransformMiddleware
     /**
      * Validate the signature of the request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     protected function validateSignature(Request $request, Closure $next): Response
     {

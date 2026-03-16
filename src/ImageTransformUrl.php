@@ -49,7 +49,7 @@ class ImageTransformUrl
      * @param  string  $path  The path to the image.
      * @param  array<string, int|string>|string  $options  The transformation options.
      * @param  string|null  $pathPrefix  The path prefix to use. Defaults to the default path prefix.
-     * @param  DateTimeInterface|\DateInterval|int|null  $expiration  The expiration time for the signed URL.
+     * @param  DateTimeInterface|DateInterval|int|null  $expiration  The expiration time for the signed URL.
      * @return string The signed URL.
      *
      * @throws InvalidConfigurationException If signed URLs are not enabled in the configuration.

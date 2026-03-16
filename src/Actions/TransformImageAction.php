@@ -10,6 +10,7 @@ use AceOfAces\LaravelImageTransformUrl\Enums\AllowedMimeTypes;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageResult;
 use AceOfAces\LaravelImageTransformUrl\ValueObjects\ImageSource;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -23,6 +24,8 @@ use Intervention\Image\Encoders\JpegEncoder;
 use Intervention\Image\Encoders\PngEncoder;
 use Intervention\Image\Encoders\WebpEncoder;
 use Intervention\Image\Laravel\Facades\Image;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TransformImageAction
 {
@@ -31,8 +34,8 @@ class TransformImageAction
     /**
      * Handle the image transformation.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     public function handle(?string $ip, ?string $pathPrefix, string $options, ?string $path = null): ImageResult
     {
@@ -169,7 +172,7 @@ class TransformImageAction
 
             abort_unless(Storage::disk($disk)->exists($diskPath), 404);
 
-            /** @var \Illuminate\Filesystem\FilesystemAdapter $diskAdapter */
+            /** @var FilesystemAdapter $diskAdapter */
             $diskAdapter = Storage::disk($disk);
             $mime = $diskAdapter->mimeType($diskPath);
 

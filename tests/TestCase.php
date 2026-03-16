@@ -6,6 +6,7 @@ use AceOfAces\LaravelImageTransformUrl\Concerns\ManagesImageCache;
 use AceOfAces\LaravelImageTransformUrl\Enums\AllowedOptions;
 use AceOfAces\LaravelImageTransformUrl\ImageTransformUrlServiceProvider;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\ServiceProvider as InterventionImageServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
@@ -37,7 +38,7 @@ class TestCase extends Orchestra
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     protected function defineEnvironment($app)

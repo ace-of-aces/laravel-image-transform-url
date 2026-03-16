@@ -8,8 +8,9 @@ use AceOfAces\LaravelImageTransformUrl\Actions\TransformImageAction;
 use AceOfAces\LaravelImageTransformUrl\Concerns\HasImageResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 
-class ImageTransformDefaultController extends \Illuminate\Routing\Controller
+class ImageTransformDefaultController extends Controller
 {
     use HasImageResponse;
 
