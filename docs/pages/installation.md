@@ -2,8 +2,8 @@
 
 ## Requirements
 
--   PHP \>= 8.3
--   Laravel 12.x
+-   PHP 8.3+
+-   Laravel 12+
 -   [GD](https://www.php.net/manual/en/book.image.php) or [Imagick](https://www.php.net/manual/en/book.imagick.php) PHP extension installed and [enabled](#driver-configuration)
 
 ::: tip
