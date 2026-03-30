@@ -2,7 +2,7 @@
 
 use AceOfAces\LaravelImageTransformUrl\Tests\TestCase;
 use Illuminate\Testing\TestResponse;
-use Intervention\Gif\Exceptions\NotReadableException;
+use Intervention\Image\Exceptions\ImageException;
 use Intervention\Image\Laravel\Facades\Image;
 use Pest\Expectation;
 
@@ -43,7 +43,7 @@ expect()->extend('toBeImage', function (array $options = []) {
     expect($imageContent)->toBeString()->not->toBeEmpty();
 
     try {
-        $image = Image::read($imageContent);
+        $image = Image::decode($imageContent);
 
         // Check dimensions if provided
         if (isset($options['width'])) {
@@ -55,7 +55,7 @@ expect()->extend('toBeImage', function (array $options = []) {
 
         return $this;
 
-    } catch (NotReadableException $e) {
+    } catch (ImageException $e) {
         expect()->not->toThrow($e);
     }
 });

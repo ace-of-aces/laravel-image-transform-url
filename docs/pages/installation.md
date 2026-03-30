@@ -26,7 +26,7 @@ php artisan vendor:publish --tag="image-transform-url-config"
 
 ## Driver Configuration
 
-To use Imagick instead of the default GD library for image processing (recommended for performance), you must [change the default image driver](https://image.intervention.io/v3/getting-started/frameworks#application-wide-configuration) for the underlying [Intervention Image](https://image.intervention.io/) package.
+To use Imagick instead of the default GD library for image processing (recommended for performance), you must [change the default image driver](https://image.intervention.io/v4/getting-started/frameworks#application-wide-configuration) for the underlying [Intervention Image](https://image.intervention.io/) package.
 
 ::: info
 The [`libvips` driver](https://github.com/Intervention/image-driver-vips) is currently not supported.
