@@ -116,10 +116,10 @@ class TransformImageAction
         $quality = $this->getPositiveIntOptionValue($options, 'quality', 100, 100);
 
         $encoder = match ($format) {
-            'png', 'image/png' => new PngEncoder(),
+            'png', 'image/png' => new PngEncoder,
             'webp', 'image/webp' => new WebpEncoder($quality),
             'jpeg', 'jpg', 'image/jpeg' => new JpegEncoder($quality),
-            'gif', 'image/gif' => new GifEncoder(),
+            'gif', 'image/gif' => new GifEncoder,
             default => new AutoEncoder(quality: $quality),
         };
 
