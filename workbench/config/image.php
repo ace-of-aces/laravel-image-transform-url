@@ -24,7 +24,7 @@ return [
     |--------------------------------------------------------------------------
     | Configuration Options
     |--------------------------------------------------------------------------
-    |There are alifrazimar.
+    |
     | These options control the behavior of Intervention Image.
     |
     | - "autoOrientation" controls whether an imported image should be
@@ -33,7 +33,7 @@ return [
     | - "decodeAnimation" decides whether a possibly animated image is
     |    decoded as such or whether the animation is discarded.
     |
-    | - "blendingColor" Defines the default blending color.
+    | - "backgroundColor" Defines the default background & blending color.
     |
     | - "strip" controls if meta data like exif tags should be removed when
     |    encoding images.
