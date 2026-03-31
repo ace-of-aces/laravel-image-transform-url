@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.3",
         "illuminate/contracts": "^12.0 || ^13.0",
-        "intervention/image-laravel": "^1.5.7",
+        "intervention/image-laravel": "^4.0.0",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {

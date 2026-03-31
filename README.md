@@ -46,7 +46,7 @@ Whether it's reporting or fixing bugs, contributing new features, or enhancing t
 
 -   [Aaron Francis](https://github.com/aarondfrancis) for the [original idea and foundational work](https://aaronfrancis.com/2025/a-cookieless-cache-friendly-image-proxy-in-laravel-inspired-by-cloudflare-9e95f7e0)
 -   [Cloudflare Images](https://developers.cloudflare.com/images/transform-images/transform-via-url/) for the URL-Syntax structure
--   [Intervention Image](https://image.intervention.io/v3) for the underlying image processing
+-   [Intervention Image](https://image.intervention.io/v4) for the underlying image processing
 
 ## License
 

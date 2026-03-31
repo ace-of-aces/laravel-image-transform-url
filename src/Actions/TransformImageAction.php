@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Direction;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\GifEncoder;
 use Intervention\Image\Encoders\JpegEncoder;
@@ -67,8 +68,8 @@ class TransformImageAction
         }
 
         $image = match ($source->type) {
-            'disk' => Image::read(Storage::disk($source->disk)->get($source->path)),
-            default => Image::read($source->path),
+            'disk' => Image::decodeBinary(Storage::disk($source->disk)->get($source->path)),
+            default => Image::decodePath($source->path),
         };
 
         if (Arr::hasAny($options, ['width', 'height'])) {
@@ -90,9 +91,9 @@ class TransformImageAction
             $flip = $this->getSelectOptionValue($options, 'flip', ['h', 'v', 'hv'], 'h');
 
             match ($flip) {
-                'h' => $image->flip(),
-                'v' => $image->flop(),
-                'hv' => $image->flip()->flop(),
+                'h' => $image->flip(Direction::HORIZONTAL),
+                'v' => $image->flip(Direction::VERTICAL),
+                'hv' => $image->flip(Direction::HORIZONTAL)->flip(Direction::VERTICAL),
                 default => null,
             };
         }
@@ -105,9 +106,8 @@ class TransformImageAction
             }
 
             if ($backgroundColor) {
-                $image->blendTransparency($backgroundColor);
+                $image->fillTransparentAreas($backgroundColor);
             }
-
         }
 
         $originalMimetype = $source->mime;
