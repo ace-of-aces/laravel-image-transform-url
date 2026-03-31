@@ -2,6 +2,32 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v2.0.0 - 2026-03-31
+
+This release introduces compatibility for [Intervention Image v4](https://image.intervention.io/v4) as the underlying image processing library.
+
+While there are no surface-level changes in this package, there are breaking changes in Intervention Image v4.
+
+> [!IMPORTANT]
+If your project uses Intervention Image directly, please review their [upgrade guide](https://image.intervention.io/v4/getting-started/upgrade).
+Otherwise, no changes are required.
+
+### What's Changed
+
+* Migrate to Intervention Image v4 by @olivervogel in https://github.com/ace-of-aces/laravel-image-transform-url/pull/34
+* chore(deps-dev): update ace-of-aces/intellipest requirement from ^0.2.0 to ^0.3.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/28
+* chore(deps): bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/27
+* chore(deps): bump pnpm/action-setup from 4 to 5 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/29
+* chore(deps): bump dependabot/fetch-metadata from 2.5.0 to 3.0.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/32
+* chore(deps): bump actions/configure-pages from 5 to 6 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/31
+* chore(deps): bump actions/deploy-pages from 4 to 5 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/30
+
+### New Contributors
+
+* @olivervogel made their first contribution in https://github.com/ace-of-aces/laravel-image-transform-url/pull/34
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v1.3.1...v2.0.0
+
 ## v1.3.1 - 2026-02-28
 
 ### What's Changed
