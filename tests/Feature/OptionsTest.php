@@ -21,6 +21,10 @@ beforeEach(function () {
         return 'imagick';
     },
     function () {
+        if (PHP_OS_FAMILY === 'Windows') {
+            test()->markTestSkipped('The Vips driver is not available on Windows CI.');
+        }
+
         config()->set('image.driver', Intervention\Image\Drivers\Vips\Driver::class);
 
         return 'vips';
