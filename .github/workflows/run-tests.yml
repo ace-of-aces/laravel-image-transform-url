@@ -59,13 +59,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y libvips42
 
-      - name: Verify image dependencies
-        run: |
-          php --ri ffi
-
-      - name: Verify libvips on Ubuntu
+      - name: Verify vips dependency on Ubuntu
         if: runner.os == 'Linux'
-        run: vips --version
+        run: |
+          php --ri vips
 
       - name: Setup problem matchers
         run: |
