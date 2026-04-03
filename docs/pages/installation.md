@@ -4,7 +4,7 @@
 
 -   PHP 8.3+
 -   Laravel 12+
--   [GD](https://www.php.net/manual/en/book.image.php) or [Imagick](https://www.php.net/manual/en/book.imagick.php) PHP extension installed and [enabled](#driver-configuration)
+-   [GD](https://www.php.net/manual/en/book.image.php), [Imagick](https://www.php.net/manual/en/book.imagick.php) or [Vips (libvips)](https://github.com/libvips/php-vips) PHP extension installed and [enabled](#driver-configuration)
 
 ::: tip
 If you want to use the file caching feature (highly recommended), a configured `Storage` disk and a `Cache` driver are required. More info in the [Image Caching](/image-caching) section.
@@ -26,10 +26,10 @@ php artisan vendor:publish --tag="image-transform-url-config"
 
 ## Driver Configuration
 
-To use Imagick instead of the default GD library for image processing (recommended for performance), you must [change the default image driver](https://image.intervention.io/v4/getting-started/frameworks#application-wide-configuration) for the underlying [Intervention Image](https://image.intervention.io/) package.
+To use Imagick or Vips instead of the default GD library for image processing (recommended for performance), you must [change the default image driver](https://image.intervention.io/v4/getting-started/frameworks#application-wide-configuration) for the underlying [Intervention Image](https://image.intervention.io/) package.
 
 ::: info
-The [`libvips` driver](https://github.com/Intervention/image-driver-vips) is currently not supported.
+For the Vips driver option, make sure you have the necessary [Vips driver package for Intervention Image](https://github.com/Intervention/image-driver-vips) installed and configured as default.
 :::
 
 ## PHP Settings
