@@ -20,7 +20,7 @@ Please review these guidelines before submitting any pull requests.
 ## 1. Package Development
 
 > ![CAUTION]
-> For package testing, both `GD` and `Imagick` drivers must be installed and enabled.
+> For package testing, all `GD`, `Imagick` and `Vips` drivers must be installed and enabled in your PHP environment.
 
 ### Setup
 
