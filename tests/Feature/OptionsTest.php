@@ -20,6 +20,11 @@ beforeEach(function () {
 
         return 'imagick';
     },
+    function () {
+        config()->set('image.driver', Intervention\Image\Drivers\Vips\Driver::class);
+
+        return 'vips';
+    },
 ]);
 
 it('can process the height option', function () {
