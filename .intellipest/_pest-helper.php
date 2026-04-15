@@ -46,18 +46,16 @@ namespace {
 
 namespace Pest {
 
-    /**
-     * @method self toBeImage()
-     */
-    class Expectation {}
+    class Expectation {
+        public function toBeImage(array $options = []): self {}
+    }
 
 }
 
 namespace Pest\Expectations {
 
-    /**
-     * @method self toBeImage()
-     */
-    class OppositeExpectation {}
+    class OppositeExpectation {
+        public function toBeImage(array $options = []): self {}
+    }
 
 }
