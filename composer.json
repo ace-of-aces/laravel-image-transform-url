@@ -27,7 +27,7 @@
     "require-dev": {
         "ext-gd": "*",
         "ext-imagick": "*",
-        "ace-of-aces/intellipest": "^0.3.0",
+        "ace-of-aces/intellipest": "^0.4.0",
         "intervention/image-driver-vips": "^4.0",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.14",
