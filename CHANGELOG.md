@@ -2,6 +2,37 @@
 
 All notable changes to `laravel-image-transform-url` will be documented in this file.
 
+## v2.1.0 - 2026-10-12
+
+This release adds support for the [Vips driver](https://github.com/ace-of-aces/laravel-image-transform-url/pull/36) and fixes a [dependency conflict](https://github.com/ace-of-aces/laravel-image-transform-url/commit/d56196e9a39098bfc20b68c872f9f7655daa37d4).
+
+### What's Changed
+
+* Add support for Vips driver by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/36
+* chore(deps): bump pnpm/action-setup from 5 to 6 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/37
+* chore(deps-dev): update ace-of-aces/intellipest requirement from ^0.3.0 to ^0.4.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/38
+* chore(deps): bump dependabot/fetch-metadata from 3.0.0 to 3.1.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/39
+* chore(deps): bump actions/upload-pages-artifact from 4 to 5 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/40
+* chore(deps-dev): update ace-of-aces/intellipest requirement from ^0.4.0 to ^1.0.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/41
+* chore(deps): bump pnpm/action-setup from 6 to 6.0.7 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/42
+* chore(deps): bump pnpm/action-setup from 6.0.7 to 6.0.8 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/43
+* Pin external GitHub Actions to commit SHAs by @ace-of-aces in https://github.com/ace-of-aces/laravel-image-transform-url/pull/44
+* chore(deps): bump pnpm/action-setup from d15e628ca66d93ee5f352c71671a7bc6a97af5c9 to 0e279bb959325dab635dd2c09392533439d90093 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/45
+* chore(deps): bump actions/checkout from 6.0.2 to 6.0.3 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/46
+* chore(deps): bump shivammathur/setup-php from 2.37.1 to 2.37.2 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/47
+* chore(deps): bump pnpm/action-setup from 6.0.8 to 6.0.9 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/48
+* chore(deps): bump actions/checkout from 6.0.3 to 7.0.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/49
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 7.1.0 to 7.2.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/50
+* chore(deps): bump actions/setup-node from 6.4.0 to 7.0.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/51
+* chore(deps): bump actions/checkout from 7.0.0 to 7.0.1 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/52
+* chore(deps): bump pnpm/action-setup from 6.0.9 to 6.0.10 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/53
+* chore(deps): bump actions/deploy-pages from 5.0.0 to 5.0.1 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/54
+* chore(deps): bump pnpm/action-setup from 6.0.10 to 6.1.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/55
+* chore(deps): bump actions/setup-node from 7.0.0 to 7.1.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/57
+* chore(deps): bump shivammathur/setup-php from 2.37.2 to 2.40.0 by @dependabot[bot] in https://github.com/ace-of-aces/laravel-image-transform-url/pull/56
+
+**Full Changelog**: https://github.com/ace-of-aces/laravel-image-transform-url/compare/v2.0.0...v2.0.1
+
 ## v2.0.0 - 2026-03-31
 
 This release introduces compatibility for [Intervention Image v4](https://image.intervention.io/v4) as the underlying image processing library.
